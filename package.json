@@ -1,30 +1,103 @@
 {
-  "name": "stakekit-monorepo",
-  "version": "0.0.0",
+  "name": "@stakekit/signers",
+  "version": "0.0.66",
+  "scripts": {
+    "clean": "rm -rf lib",
+    "lint": "eslint \"src/**/*.ts\"",
+    "build": "tsc -b .",
+    "test": "jest --config=jest.config.json --runInBand --detectOpenHandles",
+    "prepublishOnly": "pnpm build && npm pack"
+  },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:stakekit/monorepo.git"
+    "url": "git@github.com:stakekit/signers.git"
   },
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {
-    "build": "turbo run --concurrency=4 build",
-    "clean": "turbo run clean",
-    "coverage": "turbo run --concurrency=4 coverage",
-    "coverage:ci": "turbo run --concurrency=2 coverage -- --maxWorkers=2 --forceExit",
-    "format": "turbo run --concurrency=4 format",
-    "lint": "turbo run --concurrency=4 lint",
-    "postinstall": "husky install",
-    "test": "turbo run --concurrency=4 test",
-    "test:ci": "turbo run --concurrency=2 test",
-    "regen:api-hooks": "yarn workspace @stakekit/api-hooks build && yarn workspace @stakekit/api-hooks orval"
+  "author": "Multiple authors",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@anchor-protocol/anchor.js": "^5.0.2",
+    "@avalabs/avalanche-wallet-sdk": "^0.18.1",
+    "@binance-chain/javascript-sdk": "^4.2.0",
+    "@cosmjs/amino": "^0.32.2",
+    "@cosmjs/cosmwasm-stargate": "^0.32.2",
+    "@cosmjs/crypto": "^0.32.2",
+    "@cosmjs/encoding": "^0.32.2",
+    "@cosmjs/proto-signing": "^0.32.2",
+    "@cosmjs/stargate": "^0.32.2",
+    "@ensdomains/address-encoder": "^0.2.10",
+    "@ethereumjs/common": "^2.6.0",
+    "@ethereumjs/tx": "3.4.0",
+    "@ethersproject/experimental": "^5.7.0",
+    "@ethersproject/hardware-wallets": "^5.7.0",
+    "@graphprotocol/contracts": "^1.8.0",
+    "@harmony-js/staking": "^0.1.56",
+    "@ledgerhq/hw-app-cosmos": "^6.27.6",
+    "@ledgerhq/hw-app-eth": "^6.27.6",
+    "@ledgerhq/hw-app-solana": "^6.27.6",
+    "@ledgerhq/hw-transport": "^6.27.6",
+    "@ledgerhq/hw-transport-node-hid": "^6.27.1",
+    "@ledgerhq/types-live": "^6.43.1",
+    "@metamask/eth-sig-util": "^4.0.1",
+    "@obsidiansystems/hw-app-avalanche": "^0.2.2",
+    "@polkadot/api": "^10.10.1",
+    "@polkadot/keyring": "^12.6.2",
+    "@polkadot/types": "^10.11.2",
+    "@polkadot/util-crypto": "^12.6.2",
+    "@solana/buffer-layout": "^4.0.0",
+    "@solana/spl-token": "^0.3.4",
+    "@solana/web3.js": "1.52.0",
+    "@stakekit/common": "^0.0.24",
+    "@substrate/txwrapper-polkadot": "^7.1.1",
+    "@sushiswap/default-token-list": "^41.4.0",
+    "@taquito/ledger-signer": "^17.0.0",
+    "@taquito/signer": "^17.0.0",
+    "@taquito/taquito": "^17.0.0",
+    "@taquito/tzip12": "^17.0.0",
+    "@taquito/tzip16": "^17.0.0",
+    "@taquito/utils": "^17.0.0",
+    "avalanche": "^3.16.0",
+    "axios": "0.27.2",
+    "bignumber.js": "^9.0.1",
+    "bip32": "^2.0.6",
+    "bip39": "^3.0.3",
+    "borsh": "^0.7.0",
+    "bs58": "^5.0.0",
+    "buffer": "^6.0.3",
+    "buffer-layout": "^1.2.2",
+    "cosmjs-types": "^0.9.0",
+    "create-hmac": "^1.1.7",
+    "ed25519-hd-key": "^1.3.0",
+    "ethereum-multicall": "^2.14.0",
+    "ethereumjs-util": "7.1.4",
+    "ethereumjs-wallet": "^1.0.2",
+    "ethers": "^5.7.0",
+    "isomorphic-dompurify": "^0.15.0",
+    "js-sha256": "^0.10.1",
+    "lodash.startcase": "^4.4.0",
+    "memoizee": "^0.4.15",
+    "near-api-js": "^1.1.0",
+    "near-ledger-js": "^0.2.1",
+    "near-seed-phrase": "^0.2.0",
+    "patch-package": "^8.0.0",
+    "tronweb": "^5.3.0",
+    "ts-is-present": "^1.2.1",
+    "tweetnacl": "^1.0.3",
+    "web3": "^1.7.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
     "@commitlint/config-lerna-scopes": "^17.4.2",
+    "@types/create-hash": "^1.2.2",
     "@types/eslint": "^8",
+    "@types/hdkey": "^2.0.1",
+    "@types/jest": "^29.5.2",
+    "@types/memoizee": "^0.4.8",
+    "@types/node": "^20.5.9",
     "@types/prettier": "^2",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
@@ -33,11 +106,22 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.0",
+    "jest": "^29.5.0",
+    "jest-cli": "^29.5.0",
+    "jest-environment-node": "^29.5.0",
+    "jest-runner": "^29.5.0",
     "prettier": "^2.8.7",
-    "turbo": "^1.8.3"
+    "ts-jest": "^29.1.0",
+    "typescript": "^4.6.2"
   },
-  "packageManager": "yarn@4.0.2",
-  "resolutions": {
-    "@orval/query@npm:6.20.0": "patch:@orval/query@npm%3A6.20.0#~/.yarn/patches/@orval-query-npm-6.20.0-3f724ea48d.patch"
+  "bundledDependencies": [
+    "ed25519-hd-key",
+    "near-ledger-js"
+  ],
+  "pnpm": {
+    "patchedDependencies": {
+      "ed25519-hd-key@1.3.0": "patches/ed25519-hd-key@1.3.0.patch",
+      "near-ledger-js@0.2.1": "patches/near-ledger-js@0.2.1.patch"
+    }
   }
 }

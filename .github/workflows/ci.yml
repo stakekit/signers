@@ -12,41 +12,41 @@ on:
 
 jobs:
   clean-code-stage:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     env:
-      NODE_OPTIONS: '--max_old_space_size=4096'
+      NODE_OPTIONS: '--max_old_space_size=8096'
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: ./.github/composite_actions/initial_setup
 
       - name: audit
         timeout-minutes: 4
-        run: yarn npm audit
+        run: pnpm audit
         continue-on-error: true
 
       - name: lint
         timeout-minutes: 4
-        run: yarn lint
+        run: pnpm lint
 
       - name: format
         timeout-minutes: 4
-        run: yarn format
+        run: pnpm format
 
   clean-build-stage:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs: clean-code-stage
     env:
-      NODE_OPTIONS: '--max_old_space_size=4096'
+      NODE_OPTIONS: '--max_old_space_size=8096'
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: ./.github/composite_actions/initial_setup
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Test
-        run: yarn test
+        run: pnpm test

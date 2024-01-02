@@ -1,27 +1,35 @@
-name: Initial setup action
-description: Reusable action to setup node and install packages with yarn
+name: Setup action
+description: Reusable action to setup node and install packages
 
 runs:
   using: 'composite'
   steps:
-    - uses: actions/setup-node@v3
+    - name: Install Node.js
+      uses: actions/setup-node@v4
       with:
-        node-version: 18.14
+        node-version: 20
 
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+    - uses: pnpm/action-setup@v2
+      name: Install pnpm
+      id: pnpm-install
+      with:
+        version: 8.8
+        run_install: false
+
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      run: |
+        echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
       shell: bash
 
     - uses: actions/cache@v3
-      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      name: Setup pnpm cache
       with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+        key: pnpm-store-${{ hashFiles('**/package.json') }}
         restore-keys: |
-          ${{ runner.os }}-yarn-
+          pnpm-store-
 
     - name: Install dependencies
-      run: |
-        yarn install --immutable
+      run: pnpm install --frozen-lockfile
       shell: bash
