@@ -107,8 +107,8 @@ dependencies:
     specifier: 1.52.0
     version: 1.52.0(react-native@0.73.4)
   '@stakekit/common':
-    specifier: ^0.0.24
-    version: 0.0.24
+    specifier: ^0.0.25
+    version: 0.0.25
   '@substrate/txwrapper-polkadot':
     specifier: ^7.1.1
     version: 7.2.0(@polkadot/util-crypto@12.6.2)(@polkadot/util@12.6.2)
@@ -5033,8 +5033,8 @@ packages:
       '@stablelib/wipe': 1.0.1
     dev: false
 
-  /@stakekit/common@0.0.24:
-    resolution: {integrity: sha512-BNT1+PD7afWp10eeUFcx19/vGeKNdwHJTXlXDCnmepMHALc+byaWcvPVQ0bn25ax0y5GlfgPLhsuCTecN9qPfg==}
+  /@stakekit/common@0.0.25:
+    resolution: {integrity: sha512-+mU8MVug/nNjTnPI1bjzOhEhtQMqc5j+ZsMSROS3QXt8ot+dRDbvckFhZYfGfldg7NwAa0GIT4YjgPC06gb1jg==}
     dev: false
 
   /@substrate/connect-extension-protocol@1.0.1:
@@ -7321,6 +7321,7 @@ packages:
 
   /core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
+    requiresBuild: true
     dev: false
 
   /cors@2.8.5:
@@ -13093,6 +13094,7 @@ packages:
 
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
+    requiresBuild: true
     dev: false
 
   /process@0.11.10:
@@ -14418,6 +14420,7 @@ packages:
 
   /string_decoder@1.1.1:
     resolution: {integrity: sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==}
+    requiresBuild: true
     dependencies:
       safe-buffer: 5.1.2
     dev: false
