@@ -62,20 +62,20 @@ dependencies:
     specifier: ^0.1.56
     version: 0.1.56
   '@ledgerhq/hw-app-cosmos':
-    specifier: ^6.27.6
-    version: 6.29.1
+    specifier: ^6.29.4
+    version: 6.29.4
   '@ledgerhq/hw-app-eth':
-    specifier: ^6.27.6
-    version: 6.33.6
+    specifier: ^6.35.6
+    version: 6.35.6
   '@ledgerhq/hw-app-solana':
-    specifier: ^6.27.6
-    version: 6.27.6
+    specifier: ^7.1.4
+    version: 7.1.4
   '@ledgerhq/hw-transport':
-    specifier: ^6.27.6
-    version: 6.30.1
+    specifier: ^6.30.4
+    version: 6.30.4
   '@ledgerhq/hw-transport-node-hid':
-    specifier: ^6.27.1
-    version: 6.28.1
+    specifier: ^6.28.4
+    version: 6.28.4
   '@ledgerhq/types-live':
     specifier: ^6.43.1
     version: 6.43.1
@@ -3485,6 +3485,16 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
+  /@ledgerhq/cryptoassets@11.4.1:
+    resolution: {integrity: sha512-vgOHC0RxuBjoE2ZNiQScpU8hyXnYqkslw0MIuypHGnjLF48XA6rNdABS1JlMuzIFtQB2/NebUbEJ0FUPbQFHeg==}
+    dependencies:
+      axios: 1.6.3
+      bs58check: 2.1.2
+      invariant: 2.2.4
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /@ledgerhq/cryptoassets@5.53.0:
     resolution: {integrity: sha512-M3ibc3LRuHid5UtL7FI3IC6nMEppvly98QHFoSa7lJU0HDzQxY6zHec/SPM4uuJUC8sXoGVAiRJDkgny54damw==}
     dependencies:
@@ -3493,12 +3503,6 @@ packages:
 
   /@ledgerhq/cryptoassets@6.37.0:
     resolution: {integrity: sha512-xwrDKTS9koQBNNzc7CqgV6zfGHvNFWJjlIL0Kc4O4DVWYR2vUdztUHcvwHD1KPjxNYhVnsgIopmtq47fHt3nMg==}
-    dependencies:
-      invariant: 2.2.4
-    dev: false
-
-  /@ledgerhq/cryptoassets@9.13.0:
-    resolution: {integrity: sha512-MzGJyc48OGU/FLYGYwEJyfOgbJzlR8XJ9Oo6XpNpNUM1/E5NDqvD72V0D+0uWIJYN3e2NtyqHXShLZDu7P95YA==}
     dependencies:
       invariant: 2.2.4
     dev: false
@@ -3521,21 +3525,21 @@ packages:
       semver: 7.5.4
     dev: false
 
-  /@ledgerhq/devices@8.2.0:
-    resolution: {integrity: sha512-XROTW2gTmmuy+YPPDjdtKKTQ3mfxrPtKtV+a9QFbj8f5MnjVMV0Zpy1BIB4CyIMsVVi4z6+nI67auT7IlsM3SQ==}
+  /@ledgerhq/devices@8.2.1:
+    resolution: {integrity: sha512-l/2I/Xzt7Z32OmGzoc/mUvaZivdn7Id/SO7hBTGpk7PtJTpBRxVAabP4GWEKCayGyOAcvTwoVxM0HMkNVfIzOQ==}
     dependencies:
-      '@ledgerhq/errors': 6.16.1
+      '@ledgerhq/errors': 6.16.2
       '@ledgerhq/logs': 6.12.0
       rxjs: 7.8.1
       semver: 7.5.4
     dev: false
 
-  /@ledgerhq/domain-service@1.1.16:
-    resolution: {integrity: sha512-ovdYTrostrbQl5SnKoUw4BeYfLRfBSe7S0zEV9MHo3MlSHI0H4sfcpfM7g8CXybwOg/xHaP9uKm4Mlbg7JNxrg==}
+  /@ledgerhq/domain-service@1.1.18:
+    resolution: {integrity: sha512-QZUEvNpuQBa7513S4TvYaaLpUvTerJHV6eXDmWnX3fTmmfrGfFrTYhJbVF5KJ79GCaJfo+Y74zNqGqTwVXgrSA==}
     dependencies:
-      '@ledgerhq/errors': 6.16.1
+      '@ledgerhq/errors': 6.16.2
       '@ledgerhq/logs': 6.12.0
-      '@ledgerhq/types-live': 6.43.1
+      '@ledgerhq/types-live': 6.45.0
       axios: 1.6.3
       eip55: 2.1.1
       react: 18.2.0
@@ -3552,11 +3556,29 @@ packages:
     resolution: {integrity: sha512-4D4wKecGzQpIu7sx03Sg4uE1e8g1oZUndWgw9gw776H8h9ov9c5TxPaldTn2j6orPECAERViLf7LTO4L5pE2Cw==}
     dev: false
 
-  /@ledgerhq/hw-app-cosmos@6.29.1:
-    resolution: {integrity: sha512-6nqFaxGLjvmVH8/BmOhPbFXpZ1N4zgyNmaA8jMvrNhl701CAxNvMQ8/aan01eHL7+hgKeCMsctpejCICwzFHAg==}
+  /@ledgerhq/errors@6.16.2:
+    resolution: {integrity: sha512-jFpohaSW+p1Obp3NDT9QSByEtT3gtBZIjVNu8m25gnrH5zdtfPVlPwH6UiuS50s+2dHQyehV8hF+IfreKDWAZA==}
+    dev: false
+
+  /@ledgerhq/evm-tools@1.0.16:
+    resolution: {integrity: sha512-51Cx5CaUpJQaV9JLjEAck/5dct6FRn7dyAomKzZ0mwXjdzq4fRdbv2+9VGlLRWzapLdRtKWxX64nA8zzQnbhoA==}
     dependencies:
-      '@ledgerhq/errors': 6.16.1
-      '@ledgerhq/hw-transport': 6.30.1
+      '@ledgerhq/cryptoassets': 11.4.1
+      '@ledgerhq/live-env': 1.0.1
+      axios: 1.6.7
+      crypto-js: 4.2.0
+      ethers: 5.7.2
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - utf-8-validate
+    dev: false
+
+  /@ledgerhq/hw-app-cosmos@6.29.4:
+    resolution: {integrity: sha512-idqreCj1GKwIfmikiLfxd1OnywXa1k7OALOCuqa1ZOw4YNT6k24ATRqaAxxeL4aW4AanwMS+8Dz6hQEe9JUyEg==}
+    dependencies:
+      '@ledgerhq/errors': 6.16.2
+      '@ledgerhq/hw-transport': 6.30.4
       bip32-path: 0.4.2
     dev: false
 
@@ -3575,7 +3597,7 @@ packages:
     dependencies:
       '@ledgerhq/cryptoassets': 6.37.0
       '@ledgerhq/errors': 6.16.1
-      '@ledgerhq/hw-transport': 6.30.1
+      '@ledgerhq/hw-transport': 6.30.4
       '@ledgerhq/logs': 6.12.0
       axios: 0.23.0
       bignumber.js: 9.1.2
@@ -3586,37 +3608,39 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@ledgerhq/hw-app-eth@6.33.6:
-    resolution: {integrity: sha512-QzYvr5FNEWWd70Vg04A2i8CY0mtPgJrrX7/KePabjXrR8NjDyJ5Ej8qSQPBTp2dkR4TGiz5Y7+HIcWpdgYzjzg==}
+  /@ledgerhq/hw-app-eth@6.35.6:
+    resolution: {integrity: sha512-ecMY9KTr8ziJ4In0Ve9S+vFCqx1aztFGUMr678krdcBcEx0adohcfG4EKBoeRKOJSVGwp/qkvQMP8Fez4mCL5A==}
     dependencies:
       '@ethersproject/abi': 5.7.0
       '@ethersproject/rlp': 5.7.0
-      '@ledgerhq/cryptoassets': 9.13.0
-      '@ledgerhq/domain-service': 1.1.16
-      '@ledgerhq/errors': 6.16.1
-      '@ledgerhq/hw-transport': 6.30.1
-      '@ledgerhq/hw-transport-mocker': 6.28.1
+      '@ledgerhq/cryptoassets': 11.4.1
+      '@ledgerhq/domain-service': 1.1.18
+      '@ledgerhq/errors': 6.16.2
+      '@ledgerhq/evm-tools': 1.0.16
+      '@ledgerhq/hw-transport': 6.30.4
+      '@ledgerhq/hw-transport-mocker': 6.28.4
       '@ledgerhq/logs': 6.12.0
+      '@ledgerhq/types-live': 6.45.0
       axios: 1.6.3
       bignumber.js: 9.1.2
-      crypto-js: 4.2.0
     transitivePeerDependencies:
+      - bufferutil
       - debug
+      - utf-8-validate
     dev: false
 
-  /@ledgerhq/hw-app-solana@6.27.6:
-    resolution: {integrity: sha512-kZ8lBIVHO0WSaqQAqWXPVIuVueEK3B5JxLzMfqus3eaOU8kBaBceIN9cWzNdOR3WWthcZke7UunywXcnmn//GQ==}
+  /@ledgerhq/hw-app-solana@7.1.4:
+    resolution: {integrity: sha512-xOrCPKzF6RnqD9eRyjltJkWQDS39/Wev3GxvD4sKYuhERdZ+W8Gg0/nxKK468qGNPwhiDaRj7inPKGSMNCADqQ==}
     dependencies:
-      '@ledgerhq/errors': 6.16.1
-      '@ledgerhq/hw-transport': 6.30.1
-      '@ledgerhq/logs': 6.12.0
+      '@ledgerhq/errors': 6.16.2
+      '@ledgerhq/hw-transport': 6.30.4
       bip32-path: 0.4.2
     dev: false
 
-  /@ledgerhq/hw-transport-mocker@6.28.1:
-    resolution: {integrity: sha512-o2psew3qYp1O7Bh3qCdktGxm5HqVl3RHFl1zzxUOSr4i3nxvLhGvm0Ku/5tFLRjaxVwmSo6f7pBN9o+rOpcrNg==}
+  /@ledgerhq/hw-transport-mocker@6.28.4:
+    resolution: {integrity: sha512-s4GyN8AdjenO+Y6XsxQyW1bQlbsBwNZJyax4Jz2tf+AbiDC3geblaK3wAg6FTUX0tz5K0mAarEVvM03Qxdxblw==}
     dependencies:
-      '@ledgerhq/hw-transport': 6.30.1
+      '@ledgerhq/hw-transport': 6.30.4
       '@ledgerhq/logs': 6.12.0
       rxjs: 7.8.1
     dev: false
@@ -3633,12 +3657,12 @@ packages:
     dev: false
     optional: true
 
-  /@ledgerhq/hw-transport-node-hid-noevents@6.29.1:
-    resolution: {integrity: sha512-eJms10MVMlWQHLrseyThZ5rrVSVRr/fRmqiHsbldprK2Xh3hl9BFp7gCJ7W8BJe8WxrndkztgRvf2ZLknb8+/Q==}
+  /@ledgerhq/hw-transport-node-hid-noevents@6.29.4:
+    resolution: {integrity: sha512-g19nEwES/SIG9z0Zah6Y2zf883JCT57HSlHgR5DRHPrNXIJbJRZV/UbHQo3az/wZ642WmzGqkPUdmYGDjQu4rg==}
     dependencies:
-      '@ledgerhq/devices': 8.2.0
-      '@ledgerhq/errors': 6.16.1
-      '@ledgerhq/hw-transport': 6.30.1
+      '@ledgerhq/devices': 8.2.1
+      '@ledgerhq/errors': 6.16.2
+      '@ledgerhq/hw-transport': 6.30.4
       '@ledgerhq/logs': 6.12.0
       node-hid: 2.2.0
     dev: false
@@ -3673,13 +3697,13 @@ packages:
     dev: false
     optional: true
 
-  /@ledgerhq/hw-transport-node-hid@6.28.1:
-    resolution: {integrity: sha512-9aM9qVXMq/GLjYg3qm+LuzIdgbdihFhyrKb7mVDXyuUlu2f4JeGGrCnF+DfSXTMuGIMRJ8W6I/2yrO1CcB3sIA==}
+  /@ledgerhq/hw-transport-node-hid@6.28.4:
+    resolution: {integrity: sha512-f6yQvZe4cwg6ibRn1YE9wWTdvpyT7FBIxxYHAd4RKm0l5/WFZS2G8CwdNJQwlOr89iBgGvEswWYh8EhUxM5QYA==}
     dependencies:
-      '@ledgerhq/devices': 8.2.0
-      '@ledgerhq/errors': 6.16.1
-      '@ledgerhq/hw-transport': 6.30.1
-      '@ledgerhq/hw-transport-node-hid-noevents': 6.29.1
+      '@ledgerhq/devices': 8.2.1
+      '@ledgerhq/errors': 6.16.2
+      '@ledgerhq/hw-transport': 6.30.4
+      '@ledgerhq/hw-transport-node-hid-noevents': 6.29.4
       '@ledgerhq/logs': 6.12.0
       lodash: 4.17.21
       node-hid: 2.2.0
@@ -3768,13 +3792,20 @@ packages:
       events: 3.3.0
     dev: false
 
-  /@ledgerhq/hw-transport@6.30.1:
-    resolution: {integrity: sha512-Xeeo4nt33g5Fsp3CdsPvcc2Uk7dwYeKRSlSFLWcYAAKprf/PmxgNekhke1eaNU/wLoeLOWhY2Cki8F8w9nLMdQ==}
+  /@ledgerhq/hw-transport@6.30.4:
+    resolution: {integrity: sha512-VBcVd7UG8HDrjWMoZI5rqBDz+PBxLHTIPZOGY/fdMoEUwaBbss0Z3MxuJanMyerlfaLqnBSVuL0blz7rOyagkw==}
     dependencies:
-      '@ledgerhq/devices': 8.2.0
-      '@ledgerhq/errors': 6.16.1
+      '@ledgerhq/devices': 8.2.1
+      '@ledgerhq/errors': 6.16.2
       '@ledgerhq/logs': 6.12.0
       events: 3.3.0
+    dev: false
+
+  /@ledgerhq/live-env@1.0.1:
+    resolution: {integrity: sha512-pfc8n89MoF7TzE/2KO5Y9Ts5oR9/Pjzls/IWwKlL9keaO5+GmubuNcy3FFgeY2m3gbqXeVZK3hk3Fn8yaGZh6Q==}
+    dependencies:
+      rxjs: 7.8.1
+      utility-types: 3.11.0
     dev: false
 
   /@ledgerhq/logs@5.50.0:
@@ -3787,6 +3818,13 @@ packages:
 
   /@ledgerhq/types-live@6.43.1:
     resolution: {integrity: sha512-XaDACXAULFmY95scTmZNOaQMxiqmdj3kEhPRA3aDcB8VA8jzjK0+nrNx6qWNZbH3tgo1xj8gwz7bdmPoOgrqfg==}
+    dependencies:
+      bignumber.js: 9.1.2
+      rxjs: 7.8.1
+    dev: false
+
+  /@ledgerhq/types-live@6.45.0:
+    resolution: {integrity: sha512-UKcPVtI53wVOGOrcVkHwPMTNo0ajULlxs4dUmmair2al/yBFi4kosKGPw4i2T43J9rbGnKA+KVuS5G4b0dueXA==}
     dependencies:
       bignumber.js: 9.1.2
       rxjs: 7.8.1
@@ -5069,7 +5107,7 @@ packages:
     resolution: {integrity: sha512-z2IwY6OUa7pbGlxq1o4jA4Da+vfUz3eDrDNyG6rTpA3AcEjG4iLYrMnEi3LNd0OkDOyE98lkPZ+g9UswQf290A==}
     engines: {node: '>=18'}
     dependencies:
-      '@ledgerhq/hw-transport': 6.30.1
+      '@ledgerhq/hw-transport': 6.30.4
       '@stablelib/blake2b': 1.0.1
       '@taquito/core': 17.5.0
       '@taquito/taquito': 17.5.0
@@ -6129,6 +6167,16 @@ packages:
     resolution: {integrity: sha512-fWyNdeawGam70jXSVlKl+SUNVcL6j6W79CuSIPfi6HnDUmSCH6gyUys/HrqHeA/wU0Az41rRgean494d0Jb+ww==}
     dependencies:
       follow-redirects: 1.15.3
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios@1.6.7:
+    resolution: {integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==}
+    dependencies:
+      follow-redirects: 1.15.5
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -7609,6 +7657,7 @@ packages:
   /deep-extend@0.6.0:
     resolution: {integrity: sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==}
     engines: {node: '>=4.0.0'}
+    requiresBuild: true
     dev: false
 
   /deep-is@0.1.4:
@@ -8565,6 +8614,7 @@ packages:
       is-hex-prefixed: 1.0.0
       strip-hex-prefix: 1.0.0
     dev: false
+    bundledDependencies: false
 
   /event-emitter@0.3.5:
     resolution: {integrity: sha512-D9rRn9y7kLPnJ+hMq7S/nhvoKwwvVJahBi2BPmx3bvbsEdK3W9ii8cBSGjP+72/LnM4n6fo3+dkCX5FeTQruXA==}
@@ -8969,6 +9019,16 @@ packages:
         optional: true
     dev: false
 
+  /follow-redirects@1.15.5:
+    resolution: {integrity: sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
+
   /for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
     dependencies:
@@ -9040,6 +9100,7 @@ packages:
 
   /fs-constants@1.0.0:
     resolution: {integrity: sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==}
+    requiresBuild: true
     dev: false
 
   /fs-extra@11.2.0:
@@ -14374,6 +14435,7 @@ packages:
   /strip-json-comments@2.0.1:
     resolution: {integrity: sha512-4gB8na07fecVVkOI6Rs4e7T6NOTki5EmL7TUduTs6bu3EdnSycntVJ4re8kgZA+wx9IueI2Y11bfbgwtzuE0KQ==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
     dev: false
 
   /strip-json-comments@3.1.1:
@@ -14464,6 +14526,7 @@ packages:
   /tar-stream@2.2.0:
     resolution: {integrity: sha512-ujeqbceABgwMZxEJnk2HDY2DlnUZ+9oEcb1KzTVfYHio0UE6dG71n60d8D2I4qNvleWrrXpmjpt7vZeF1LnMZQ==}
     engines: {node: '>=6'}
+    requiresBuild: true
     dependencies:
       bl: 4.1.0
       end-of-stream: 1.4.4
@@ -15126,6 +15189,11 @@ packages:
       is-generator-function: 1.0.10
       is-typed-array: 1.1.12
       which-typed-array: 1.1.13
+    dev: false
+
+  /utility-types@3.11.0:
+    resolution: {integrity: sha512-6Z7Ma2aVEWisaL6TvBCy7P8rm2LQoPv6dJ7ecIaIixHcwfbJ0x7mWdbcwlIM5IGQxPZSFYeqRCqlOOeKoJYMkw==}
+    engines: {node: '>= 4'}
     dev: false
 
   /utils-merge@1.0.1:
