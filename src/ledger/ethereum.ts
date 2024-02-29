@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { ethers } from 'ethers';
 import EthLedgerApp from '@ledgerhq/hw-app-eth';
 import { isEIP712Message } from '../utils/is-eip712';
@@ -82,7 +83,7 @@ export class EthereumLedgerSigner extends ethers.Signer {
   async signTransaction(
     transaction: ethers.providers.TransactionRequest,
   ): Promise<string> {
-    const tx = await ethers.utils.resolveProperties(transaction);
+    const tx: any = await ethers.utils.resolveProperties(transaction);
 
     //@ts-ignore
     const baseTx: ethers.utils.UnsignedTransaction = {

@@ -52,7 +52,7 @@ const getLedgerWallet = async (
     },
   );
 
-  if (!avalancheWallet) {
+  if (avalancheWallet === undefined) {
     return null;
   }
 

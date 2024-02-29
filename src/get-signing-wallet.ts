@@ -62,12 +62,15 @@ const avalancheCSigningWallet = async (
 ): Promise<SigningWallet> => {
   const avalancheWallet = await getAvalancheWallet(new Avalanche(), options);
   const wallet = await getEthereumWallet(options);
+  if (avalancheWallet === null) {
+    throw new Error('Wallet not initialised');
+  }
   return {
     signTransaction: (tx) => wallet.signTransaction(JSON.parse(tx)),
     getAddress: () => wallet.getAddress(),
     getAdditionalAddresses: async () => ({
-      cAddressBech: avalancheWallet?.getCAddressString()!,
-      pAddressBech: avalancheWallet?.getPAddressString()!,
+      cAddressBech: avalancheWallet.getCAddressString(),
+      pAddressBech: avalancheWallet.getPAddressString(),
     }),
   };
 };
@@ -76,6 +79,10 @@ const avalanchePSigningWallet = async (
   options: WalletOptions,
 ): Promise<SigningWallet> => {
   const wallet = await getAvalancheWallet(new Avalanche(), options);
+  if (wallet === null) {
+    throw new Error('Wallet not initialised');
+  }
+
   return {
     signTransaction: async (str) => {
       const { buffer }: AvalancheUnsignedTransactionSerialized =
@@ -84,13 +91,13 @@ const avalanchePSigningWallet = async (
       const unsignedTx = new UnsignedPtx();
       unsignedTx.deserialize(JSON.parse(Buffer.from(buffer, 'hex').toString()));
 
-      const signed: PTx = await wallet!.signP(unsignedTx);
+      const signed: PTx = await wallet.signP(unsignedTx);
       return signed.toStringHex();
     },
-    getAddress: async () => wallet?.ethereumAddress!,
+    getAddress: async () => wallet.ethereumAddress,
     getAdditionalAddresses: async () => ({
-      cAddressBech: wallet?.getCAddressString()!,
-      pAddressBech: wallet?.getPAddressString()!,
+      cAddressBech: wallet.getCAddressString(),
+      pAddressBech: wallet.getPAddressString(),
     }),
   };
 };
@@ -99,6 +106,9 @@ const avalancheCAtomicSigningWallet = async (
   options: WalletOptions,
 ): Promise<SigningWallet> => {
   const wallet = await getAvalancheWallet(new Avalanche(), options);
+  if (wallet === null) {
+    throw new Error('Wallet not initialised');
+  }
   return {
     signTransaction: async (str) => {
       const {
@@ -140,13 +150,13 @@ const avalancheCAtomicSigningWallet = async (
         unsignedTx['transaction']['numIns'] = Buffer.alloc(4);
       }
 
-      const signed: EvmTx = await wallet!.signC(unsignedTx);
+      const signed: EvmTx = await wallet.signC(unsignedTx);
       return signed.toStringHex();
     },
-    getAddress: async () => wallet?.ethereumAddress!,
+    getAddress: async () => wallet.ethereumAddress!,
     getAdditionalAddresses: async () => ({
-      cAddressBech: wallet?.getCAddressString()!,
-      pAddressBech: wallet?.getPAddressString()!,
+      cAddressBech: wallet.getCAddressString()!,
+      pAddressBech: wallet.getPAddressString()!,
     }),
   };
 };
@@ -328,7 +338,7 @@ const binanceSigningWallet = async (
     signTransaction: async (raw: string) => {
       const privateKey = (wallet as any).privateKey;
 
-      if (privateKey) {
+      if (privateKey !== undefined) {
         const { signMsg, txRaw } = JSON.parse(raw);
 
         for (const [key, value] of Object.entries(txRaw.msg)) {
@@ -357,7 +367,7 @@ const solanaSigningWallet = async (
 
   const getSolanaIndexedWallet = (index: number) =>
     getSolanaWallet(
-      isLedgerOptions(options!)
+      isLedgerOptions(options)
         ? {
             ...options,
             config: {
@@ -370,9 +380,9 @@ const solanaSigningWallet = async (
             },
           }
         : {
-            ...options!,
+            ...options,
             derivationPathOverride: getSolanaStakeAccountDerivationPath(
-              options!,
+              options,
               index,
             ),
           },

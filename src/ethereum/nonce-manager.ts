@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers } from 'ethers';
 
 export class NonceManager extends ethers.Signer {
   readonly signer!: ethers.Signer;
@@ -9,8 +9,8 @@ export class NonceManager extends ethers.Signer {
   constructor(signer: ethers.Signer) {
     super();
     this._deltaCount = 0;
-    ethers.utils.defineReadOnly(this, "signer", signer);
-    ethers.utils.defineReadOnly(this, "provider", signer.provider);
+    ethers.utils.defineReadOnly(this, 'signer', signer);
+    ethers.utils.defineReadOnly(this, 'provider', signer.provider);
   }
 
   connect(provider: ethers.providers.Provider): NonceManager {
@@ -22,9 +22,9 @@ export class NonceManager extends ethers.Signer {
   }
 
   getTransactionCount(blockTag?: ethers.providers.BlockTag): Promise<number> {
-    if (blockTag === "pending") {
-      if (!this._initialPromise) {
-        this._initialPromise = this.signer.getTransactionCount("pending");
+    if (blockTag === 'pending') {
+      if (this._initialPromise === undefined) {
+        this._initialPromise = this.signer.getTransactionCount('pending');
       }
       const deltaCount = this._deltaCount;
       return this._initialPromise.then((initial) => initial + deltaCount);
@@ -36,7 +36,7 @@ export class NonceManager extends ethers.Signer {
   setTransactionCount(
     transactionCount:
       | ethers.BigNumberish
-      | Promise<ethers.BigNumberish | undefined>
+      | Promise<ethers.BigNumberish | undefined>,
   ): void {
     this._initialPromise = Promise.resolve(transactionCount).then((nonce) => {
       return ethers.BigNumber.from(nonce).toNumber();
@@ -53,20 +53,20 @@ export class NonceManager extends ethers.Signer {
   }
 
   signTransaction(
-    transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>
+    transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>,
   ): Promise<string> {
     return this.signer.signTransaction(transaction);
   }
 
   sendTransaction(
-    transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>
+    transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>,
   ): Promise<ethers.providers.TransactionResponse> {
-    if (transaction.nonce) {
+    if (transaction.nonce !== undefined) {
       this.setTransactionCount(transaction.nonce);
       this._deltaCount++;
     } else {
       transaction = ethers.utils.shallowCopy(transaction);
-      transaction.nonce = this.getTransactionCount("pending");
+      transaction.nonce = this.getTransactionCount('pending');
       this.incrementTransactionCount();
     }
 
@@ -76,14 +76,14 @@ export class NonceManager extends ethers.Signer {
   }
 
   populateTransaction(
-    transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>
+    transaction: ethers.utils.Deferrable<ethers.providers.TransactionRequest>,
   ): Promise<ethers.providers.TransactionRequest> {
-    if (transaction.nonce) {
+    if (transaction.nonce !== undefined) {
       this.setTransactionCount(transaction.nonce);
       this._deltaCount++;
     } else {
       transaction = ethers.utils.shallowCopy(transaction);
-      transaction.nonce = this.getTransactionCount("pending");
+      transaction.nonce = this.getTransactionCount('pending');
       this.incrementTransactionCount();
     }
 

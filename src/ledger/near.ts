@@ -1,7 +1,7 @@
-import { baseEncode } from "borsh";
-import * as sha256 from "js-sha256";
-import { KeyPair, Signer } from "near-api-js";
-import { PublicKey, Signature } from "near-api-js/lib/utils/key_pair";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import * as sha256 from 'js-sha256';
+import { KeyPair, Signer } from 'near-api-js';
+import { PublicKey, Signature } from 'near-api-js/lib/utils/key_pair';
 
 export class NearLedgerSigner extends Signer {
   private pubKey?: PublicKey;
@@ -15,13 +15,19 @@ export class NearLedgerSigner extends Signer {
       return this.pubKey;
     }
 
-    const pubKey: Buffer = await this.near.getPublicKey(this.derivationPath);
-    this.pubKey = PublicKey.from(baseEncode(pubKey));
+    const { publicKey }: { publicKey: string; address: string } =
+      await this.near.getAddress(this.derivationPath, false);
+
+    this.pubKey = PublicKey.from(publicKey);
+
     return this.pubKey;
   }
 
   async signMessage(message: Uint8Array): Promise<Signature> {
-    const signature = await this.near.sign(message, this.derivationPath);
+    const signature = await this.near.signTransaction(
+      message,
+      this.derivationPath,
+    );
     return {
       signature,
       publicKey: await this.getPublicKey(),
@@ -30,9 +36,9 @@ export class NearLedgerSigner extends Signer {
 
   createKey(
     accountId: string,
-    networkId?: string | undefined
+    networkId?: string | undefined,
   ): Promise<PublicKey> {
-    throw new Error("Unsupported operation");
+    throw new Error('Unsupported operation');
   }
 }
 
@@ -52,8 +58,8 @@ export class NearSigner extends Signer {
 
   createKey(
     accountId: string,
-    networkId?: string | undefined
+    networkId?: string | undefined,
   ): Promise<PublicKey> {
-    throw new Error("Unsupported operation");
+    throw new Error('Unsupported operation');
   }
 }

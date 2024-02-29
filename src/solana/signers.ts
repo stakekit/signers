@@ -1,7 +1,7 @@
-import SolanaLedgerApp from "@ledgerhq/hw-app-solana";
-import Transport from "@ledgerhq/hw-transport";
-import { Keypair, PublicKey, Transaction } from "@solana/web3.js";
-import * as nacl from "tweetnacl";
+import SolanaLedgerApp from '@ledgerhq/hw-app-solana';
+import Transport from '@ledgerhq/hw-transport';
+import { Keypair, PublicKey, Transaction } from '@solana/web3.js';
+import * as nacl from 'tweetnacl';
 
 export interface SolanaSigner {
   sign: (x: Buffer) => Promise<Buffer>;
@@ -16,11 +16,11 @@ export class SolanaKeyPairSigner implements SolanaSigner {
   async signTransaction(tx: Transaction) {
     const signature = nacl.sign.detached(
       tx.compileMessage().serialize(),
-      this.keyPair.secretKey
+      this.keyPair.secretKey,
     );
 
     const existingIndex = tx.signatures.findIndex(
-      (x) => x.publicKey.toBase58() === this.keyPair.publicKey.toBase58()
+      (x) => x.publicKey.toBase58() === this.keyPair.publicKey.toBase58(),
     );
     if (existingIndex !== -1) {
       tx.signatures[existingIndex].signature = Buffer.from(signature);
@@ -48,13 +48,14 @@ export class SolanaLedgerSigner implements SolanaSigner {
 
   constructor(transport: Transport, derivationPath: string) {
     // Solana Ledger app doesn't like leading purpose (m)
-    const [_m, ...rest] = derivationPath.split("/");
-    this.derivationPath = rest.join("/");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_m, ...rest] = derivationPath.split('/');
+    this.derivationPath = rest.join('/');
     this.sol = new SolanaLedgerApp(transport as any);
   }
 
   async getPublicKey() {
-    if (!this.publicKey) {
+    if (this.publicKey === undefined) {
       const { address } = await this.sol.getAddress(this.derivationPath);
       this.publicKey = new PublicKey(address);
     }
@@ -65,7 +66,7 @@ export class SolanaLedgerSigner implements SolanaSigner {
   async signTransaction(tx: Transaction) {
     const { signature } = await this.sol.signTransaction(
       this.derivationPath,
-      tx.compileMessage().serialize()
+      tx.compileMessage().serialize(),
     );
 
     // tx.signatures = [{ publicKey: await this.getPublicKey(), signature: null }];
@@ -77,7 +78,7 @@ export class SolanaLedgerSigner implements SolanaSigner {
   async sign(message: Buffer) {
     const { signature } = await this.sol.signTransaction(
       this.derivationPath,
-      message
+      message,
     );
     return signature;
   }

@@ -1,6 +1,6 @@
 export const incrementDerivationPath = (
   derivationPath: string,
-  incrementBy = 1
+  incrementBy = 1,
 ) => {
   const index = derivationPath.endsWith("'")
     ? derivationPath.length - 2

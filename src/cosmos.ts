@@ -40,7 +40,7 @@ export const getStargateWallet = async (
   network: CosmosNetworks,
 ): Promise<Secp256k1HdWallet | DirectSecp256k1HdWallet> => {
   if (isLedgerOptions(options)) {
-    if (!options.config.Cosmos?.derivationPath) {
+    if (options.config.Cosmos?.derivationPath === undefined) {
       throw new Error('missing cosmos derivation path');
     }
 
@@ -64,7 +64,8 @@ export const getStargateWallet = async (
   // @ts-ignore
   const wallet = new DirectSecp256k1HdWallet(mnemonic, {
     prefix,
-    hdPaths: derivationPath ? [stringToPath(derivationPath)] : undefined,
+    hdPaths:
+      derivationPath !== undefined ? [stringToPath(derivationPath)] : undefined,
     seed,
   });
 
