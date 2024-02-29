@@ -29,12 +29,12 @@ export class StakeKitAvalancheWallet extends LedgerWallet {
     derivationPath: string,
   ): Promise<string> {
     const ethApp = getAppEth(transport);
-    let ethRes = await ethApp.getAddress(
+    const ethRes = await ethApp.getAddress(
       parseDerivationPath(derivationPath).prefix,
       false,
       true,
     );
-    let hdEth = new HDKey();
+    const hdEth = new HDKey();
 
     hdEth.publicKey = Buffer.from(ethRes.publicKey, 'hex');
     hdEth.chainCode = Buffer.from(ethRes.chainCode!, 'hex');
@@ -63,11 +63,11 @@ export class StakeKitAvalancheWallet extends LedgerWallet {
     const prov = await getLedgerProvider(transport);
     const res = await prov.getXPUB(transport, derivationPath);
 
-    let pubKey = res.pubKey;
-    let chainCode = res.chainCode;
+    const pubKey = res.pubKey;
+    const chainCode = res.chainCode;
 
     // Get the base58 publick key from the HDKey instance
-    let hdKey = new HDKey();
+    const hdKey = new HDKey();
     hdKey.publicKey = pubKey;
     hdKey.chainCode = chainCode;
 
