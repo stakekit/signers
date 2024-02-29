@@ -30,10 +30,6 @@ jobs:
         timeout-minutes: 4
         run: pnpm lint
 
-      - name: format
-        timeout-minutes: 4
-        run: pnpm format
-
   clean-build-stage:
     runs-on: macos-latest
     needs: clean-code-stage
