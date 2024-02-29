@@ -61,6 +61,7 @@ export type LedgerOptions = {
 export function isLedgerOptions(
   x: WalletOptions | LedgerOptions | SolanaWalletOptions,
 ): x is LedgerOptions {
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   return !!(x as any).transport;
 }
 
@@ -145,9 +146,9 @@ export enum LedgerApps {
 export const defaultLedgerDerivationPaths: { [x in LedgerApps]: string } = {
   [LedgerApps.Ethereum]: metamaskPath(0),
   [LedgerApps.Cosmos]: keplrPath(0),
-  [LedgerApps.NEAR]: "44'/397'/0'/0'/1'",
+  [LedgerApps.NEAR]: "44'/397'/0'/0'/0'",
   [LedgerApps.Tezos]: "44'/1729'/0'/0'",
-  [LedgerApps.Avalanche]: "m/44'/9000'/0'/0/0",
+  [LedgerApps.Avalanche]: "m/44'/9000'/0'",
   [LedgerApps.Binance]: "44/714/0/0/0'",
   [LedgerApps.Solana]: phantomPath(0),
 };

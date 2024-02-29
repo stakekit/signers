@@ -4,7 +4,6 @@ import {
   encodeSecp256k1Signature,
   OfflineAminoSigner,
   StdSignDoc,
-  makeSignDoc,
 } from '@cosmjs/amino';
 import { Secp256k1, Secp256k1Signature } from '@cosmjs/crypto';
 import LedgerAppCosmos from '@ledgerhq/hw-app-cosmos';
@@ -16,14 +15,14 @@ export class CosmosLedgerSigner implements OfflineAminoSigner {
 
   static async init(
     app: LedgerAppCosmos,
-    options: { derivationPath: string; prefix: string }
+    options: { derivationPath: string; prefix: string },
   ) {
     return new CosmosLedgerSigner(app, options);
   }
 
   public constructor(
     private app: LedgerAppCosmos,
-    private options: { derivationPath: string; prefix: string }
+    private options: { derivationPath: string; prefix: string },
   ) {}
 
   public async getAccounts(): Promise<readonly AccountData[]> {
@@ -33,7 +32,7 @@ export class CosmosLedgerSigner implements OfflineAminoSigner {
 
     const result = await this.app.getAddress(
       this.options.derivationPath,
-      this.options.prefix
+      this.options.prefix,
     );
 
     this.accounts = [result].map((x) => ({
@@ -47,11 +46,11 @@ export class CosmosLedgerSigner implements OfflineAminoSigner {
 
   public async signAmino(
     signerAddress: string,
-    signDoc: StdSignDoc
+    signDoc: StdSignDoc,
   ): Promise<AminoSignResponse> {
     const result = await this.app.sign(
       this.options.derivationPath,
-      JSON.stringify(sortedObject(signDoc))
+      JSON.stringify(sortedObject(signDoc)),
     );
 
     if (!result.signature) {
@@ -61,7 +60,7 @@ export class CosmosLedgerSigner implements OfflineAminoSigner {
     const [{ pubkey }] = await this.getAccounts();
     const stdSignature = encodeSecp256k1Signature(
       pubkey,
-      Secp256k1Signature.fromDer(result.signature).toFixedLength()
+      Secp256k1Signature.fromDer(result.signature).toFixedLength(),
     );
 
     return {

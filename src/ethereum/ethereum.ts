@@ -14,7 +14,7 @@ import { EthWalletApp } from './eip712-wrapper';
 
 export const getEthereumWallet = async (options: WalletOptions) => {
   if (isLedgerOptions(options)) {
-    if (!options.config.Ethereum?.derivationPath) {
+    if (options.config.Ethereum?.derivationPath === undefined) {
       throw new Error('missing Ethereum derivation path');
     }
 
@@ -27,7 +27,7 @@ export const getEthereumWallet = async (options: WalletOptions) => {
   const { mnemonic, walletType, index } = options;
   const derivationPath = walletDerivationPaths[walletType].evm(index);
 
-  if (!derivationPath) {
+  if (derivationPath === undefined) {
     const seed = await getSeed(mnemonic);
     const hdNode = ethers.utils.HDNode.fromSeed(seed);
     return new EthWalletApp(hdNode.privateKey);

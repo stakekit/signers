@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { BncClient, crypto, ledger } from '@binance-chain/javascript-sdk';
 import { LedgerSigningDelegate } from '@binance-chain/javascript-sdk/lib/client';
 import { PublicKey } from '@binance-chain/javascript-sdk/lib/ledger/ledger-app';
@@ -19,7 +20,7 @@ export const getBinanceChainWallet = async (
   | { address: string; privateKey: string }
 > => {
   if (isLedgerOptions(options)) {
-    if (!options.config.Binance?.derivationPath) {
+    if (options.config.Binance?.derivationPath === undefined) {
       throw new Error('binance derivation path not found');
     }
 

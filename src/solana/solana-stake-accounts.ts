@@ -29,11 +29,11 @@ import { MnemonicWalletOptions, walletDerivationPaths } from '../constants';
 
 export function getSolanaStakeAccountDerivationPath(
   options: Omit<MnemonicWalletOptions, 'mnemonic'>,
-  incrementBy: number
+  incrementBy: number,
 ) {
   const derivationPath = walletDerivationPaths[options.walletType].solana(
-    options.index
-  )!;
+    options.index,
+  );
 
   let baseDerivationPath = derivationPath ?? STEAKWALLET_SOLANA_DERIVATION_PATH;
   if (baseDerivationPath !== STEAKWALLET_SOLANA_DERIVATION_PATH) {

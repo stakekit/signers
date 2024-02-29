@@ -1,8 +1,8 @@
-import { Keypair } from "@solana/web3.js";
-import { derivePath } from "ed25519-hd-key";
-import * as nacl from "tweetnacl";
+import { Keypair } from '@solana/web3.js';
+import { derivePath } from 'ed25519-hd-key';
+import * as nacl from 'tweetnacl';
 
-import { getNode, getSeed } from "../common";
+import { getNode, getSeed } from '../common';
 import {
   ImportableWallets,
   LedgerApps,
@@ -11,16 +11,16 @@ import {
   isLedgerOptions,
   isSolanaWalletOptions,
   walletDerivationPaths,
-} from "../constants";
+} from '../constants';
 import {
   STEAKWALLET_SOLANA_DERIVATION_PATH,
   isSteakwalletSolana,
-} from "./constants";
+} from './constants';
 import {
   SolanaKeyPairSigner,
   SolanaLedgerSigner,
   SolanaSigner,
-} from "./signers";
+} from './signers';
 
 async function fromMnemonic(mnemonic: string, derivationPath: string) {
   // stake account
@@ -32,14 +32,16 @@ async function fromMnemonic(mnemonic: string, derivationPath: string) {
   ) {
     const node = await getNode(mnemonic);
     const base = node.derivePath(derivationPath);
-    return new SolanaKeyPairSigner(Keypair.fromSeed(base.privateKey!));
+    return new SolanaKeyPairSigner(
+      Keypair.fromSeed(base.privateKey as Uint8Array),
+    );
   }
 
   // Phantom wallet or a Phantom stake account
-  const seed = Buffer.from(await getSeed(mnemonic)).toString("hex");
+  const seed = Buffer.from(await getSeed(mnemonic)).toString('hex');
   const key = derivePath(derivationPath, seed).key;
   return new SolanaKeyPairSigner(
-    Keypair.fromSecretKey(nacl.sign.keyPair.fromSeed(key).secretKey)
+    Keypair.fromSecretKey(nacl.sign.keyPair.fromSeed(key).secretKey),
   );
 }
 
@@ -52,16 +54,16 @@ async function fromMnemonic(mnemonic: string, derivationPath: string) {
  * m/44'/501'/XXX'/XXX' means it's a Phantom wallet or a Phantom stake account
  */
 export const getSolanaWallet = async (
-  options: WalletOptions | SolanaWalletOptions
+  options: WalletOptions | SolanaWalletOptions,
 ): Promise<SolanaSigner> => {
   if (isLedgerOptions(options)) {
-    if (!options.config.Solana?.derivationPath) {
-      throw new Error("missing solana derivation path");
+    if (options.config.Solana?.derivationPath === undefined) {
+      throw new Error('missing solana derivation path');
     }
 
     return new SolanaLedgerSigner(
       await options.transport(LedgerApps.Solana),
-      options.config.Solana.derivationPath!
+      options.config.Solana.derivationPath,
     );
   }
 
@@ -75,11 +77,13 @@ export const getSolanaWallet = async (
   ) {
     const node = await getNode(options.mnemonic);
     const base = node.derivePath(STEAKWALLET_SOLANA_DERIVATION_PATH);
-    return new SolanaKeyPairSigner(Keypair.fromSeed(base.privateKey!));
+    return new SolanaKeyPairSigner(
+      Keypair.fromSeed(base.privateKey as Uint8Array),
+    );
   }
 
   const derivationPath = walletDerivationPaths[options.walletType].solana(
-    options.index
-  )!;
-  return fromMnemonic(options.mnemonic, derivationPath);
+    options.index,
+  );
+  return fromMnemonic(options.mnemonic, derivationPath!);
 };

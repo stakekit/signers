@@ -16,7 +16,7 @@ export const getTezosWallet = async (
   options: WalletOptions,
 ): Promise<InMemorySigner | LedgerSigner> => {
   if (isLedgerOptions(options)) {
-    if (!options.config.Tezos?.derivationPath) {
+    if (options.config.Tezos?.derivationPath === undefined) {
       throw new Error('missing Tezos derivation path');
     }
 
@@ -29,8 +29,8 @@ export const getTezosWallet = async (
   }
 
   const { mnemonic, walletType, index } = options;
-  const derivationPath = walletDerivationPaths[walletType].tezos(index)!;
-  if (!derivationPath) {
+  const derivationPath = walletDerivationPaths[walletType].tezos(index);
+  if (derivationPath === undefined) {
     return await InMemorySigner.fromFundraiser(
       'steakwallet',
       'steakwallet',
