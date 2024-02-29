@@ -172,6 +172,9 @@ dependencies:
   ethers:
     specifier: ^5.7.0
     version: 5.7.2
+  hdkey:
+    specifier: 2.0.1
+    version: 2.0.1
   isomorphic-dompurify:
     specifier: ^0.15.0
     version: 0.15.0

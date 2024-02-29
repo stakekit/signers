@@ -20,7 +20,7 @@ import {
   getEthereumWallet,
   isLedgerOptions,
 } from '.';
-import { LedgerWallet, MnemonicWallet } from '@avalabs/avalanche-wallet-sdk';
+import { StakeKitAvalancheWallet } from './ledger/avalanche';
 
 const serialization = Serialization.getInstance();
 
@@ -46,7 +46,11 @@ const getLedgerWallet = async (
   options: LedgerOptions,
 ): Promise<AvalancheKeyChains | null> => {
   const transport = await options.transport(LedgerApps.Avalanche);
-  const ledgerWallet = await LedgerWallet.fromTransport(transport);
+  const ledgerWallet = await StakeKitAvalancheWallet.fromStakeKitTransport(
+    transport,
+    options.config.Avalanche?.derivationPath as string,
+    options.config.Ethereum?.derivationPath as string,
+  );
 
   if (ledgerWallet === undefined) {
     return null;
