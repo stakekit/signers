@@ -6,20 +6,20 @@ import SolanaLedgerApp from '@ledgerhq/hw-app-solana';
 import Near from '@ledgerhq/hw-app-near';
 
 import Transport from '@ledgerhq/hw-transport';
-import AvaxLedgerApp from '@obsidiansystems/hw-app-avalanche';
 import {
   HDPathTemplate,
   LedgerSigner as TezosLedgerApp,
 } from '@taquito/ledger-signer';
 
 import { LedgerApps } from '../constants';
+import { getAppAvax } from '@avalabs/avalanche-wallet-sdk';
 
 const resolver: {
   [x in LedgerApps]: (transport: Transport) => Promise<boolean>;
 } = {
   [LedgerApps.Avalanche]: async (t) => {
-    const app = new AvaxLedgerApp(t);
-    return !!(await app.getAppConfiguration());
+    const app = getAppAvax(t, 'zondax');
+    return !!(await app.getAppConfiguration);
   },
   [LedgerApps.Ethereum]: async (t) => {
     const app = new EthLedgerApp(t);

@@ -153,10 +153,10 @@ const avalancheCAtomicSigningWallet = async (
       const signed: EvmTx = await wallet.signC(unsignedTx);
       return signed.toStringHex();
     },
-    getAddress: async () => wallet.ethereumAddress!,
+    getAddress: async () => wallet.ethereumAddress,
     getAdditionalAddresses: async () => ({
-      cAddressBech: wallet.getCAddressString()!,
-      pAddressBech: wallet.getPAddressString()!,
+      cAddressBech: wallet.getCAddressString(),
+      pAddressBech: wallet.getPAddressString(),
     }),
   };
 };

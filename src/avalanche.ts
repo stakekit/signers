@@ -13,13 +13,14 @@ import { Serialization } from 'avalanche/dist/utils';
 import { ethers } from 'ethers';
 
 import {
+  LedgerApps,
   LedgerOptions,
   MnemonicWalletOptions,
-  OmniAvalancheLedgerWallet,
   WalletOptions,
   getEthereumWallet,
   isLedgerOptions,
 } from '.';
+import { LedgerWallet, MnemonicWallet } from '@avalabs/avalanche-wallet-sdk';
 
 const serialization = Serialization.getInstance();
 
@@ -44,21 +45,16 @@ const getLedgerWallet = async (
   avalanche: Avalanche,
   options: LedgerOptions,
 ): Promise<AvalancheKeyChains | null> => {
-  const avalancheWallet = await OmniAvalancheLedgerWallet.fromTransport(
-    options.transport,
-    {
-      ethereum: options.config.Ethereum!.derivationPath,
-      avalanche: options.config.Avalanche!.derivationPath,
-    },
-  );
+  const transport = await options.transport(LedgerApps.Avalanche);
+  const ledgerWallet = await LedgerWallet.fromTransport(transport);
 
-  if (avalancheWallet === undefined) {
+  if (ledgerWallet === undefined) {
     return null;
   }
 
-  const ethereumAddress = await avalancheWallet.getAddressC();
-  const cAddressBech = avalancheWallet.getEvmAddressBech();
-  const pAddressBech = avalancheWallet.getAddressP();
+  const ethereumAddress = ledgerWallet.getAddressC();
+  const cAddressBech = ledgerWallet.getEvmAddressBech();
+  const pAddressBech = ledgerWallet.getAddressP();
 
   const pchain = avalanche.PChain();
   const cchain = avalanche.CChain();
@@ -76,8 +72,8 @@ const getLedgerWallet = async (
 
     ethereumAddress,
 
-    signC: (tx: UnsignedEvmTx) => avalancheWallet.signC(tx),
-    signP: (tx: UnsignedPlatformTx) => avalancheWallet.signP(tx),
+    signC: (tx: UnsignedEvmTx) => ledgerWallet.signC(tx),
+    signP: (tx: UnsignedPlatformTx) => ledgerWallet.signP(tx),
 
     getEthereumAddress: async () => ethereumAddress,
     getCAddressString: () => cAddressBech,
@@ -105,7 +101,6 @@ const getMnemonicWallet = async (
 
   const pchain = avalanche.PChain();
   const cchain = avalanche.CChain();
-
   cchain.keyChain().importKey(Buffer.from(wallet.privateKey.slice(2), 'hex'));
   pchain.keyChain().importKey(Buffer.from(wallet.privateKey.slice(2), 'hex'));
 
