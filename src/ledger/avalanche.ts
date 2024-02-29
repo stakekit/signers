@@ -24,6 +24,21 @@ export function getEthAddressKeyFromAccountKey(xpub: string, path: string) {
 }
 
 export class StakeKitAvalancheWallet extends LedgerWallet {
+  avaxDerivationPath: string | null;
+  ethDerivationPath: string | null;
+  constructor(
+    xpubAVM: string,
+    xpubEVM: string,
+    accountIndex: number,
+    avaxDerivationPath: string | null,
+    ethDerivationPath: string | null,
+  ) {
+    super(xpubAVM, xpubEVM, accountIndex);
+
+    this.avaxDerivationPath = avaxDerivationPath;
+    this.ethDerivationPath = ethDerivationPath;
+  }
+
   static async getStakeKitExtendedPublicKeyEthAccount(
     transport: Transport,
     derivationPath: string,
@@ -94,7 +109,13 @@ export class StakeKitAvalancheWallet extends LedgerWallet {
 
     // Use this transport for all ledger instances
     await LedgerWallet.setTransport(transport);
-    const wallet = new StakeKitAvalancheWallet(pubAvax, pubEth, 0);
+    const wallet = new StakeKitAvalancheWallet(
+      pubAvax,
+      pubEth,
+      0,
+      AvaxDerivationPath,
+      EthDerivationPath,
+    );
     return wallet;
   }
 }
