@@ -1,6 +1,6 @@
 {
   "name": "@stakekit/signers",
-  "version": "0.0.68",
+  "version": "0.0.71",
   "scripts": {
     "clean": "rm -rf lib",
     "lint": "eslint \"src/**/*.ts\"",
@@ -22,7 +22,6 @@
     "@anchor-protocol/anchor.js": "^5.0.2",
     "@avalabs/avalanche-wallet-sdk": "^0.19.1",
     "@binance-chain/javascript-sdk": "^4.2.0",
-    "hdkey": "2.0.1",
     "@cosmjs/amino": "^0.32.2",
     "@cosmjs/cosmwasm-stargate": "^0.32.2",
     "@cosmjs/crypto": "^0.32.2",
@@ -49,7 +48,7 @@
     "@solana/buffer-layout": "^4.0.0",
     "@solana/spl-token": "^0.3.4",
     "@solana/web3.js": "1.52.0",
-    "@stakekit/common": "^0.0.25",
+    "@stakekit/common": "^0.0.28",
     "@substrate/txwrapper-polkadot": "^7.1.1",
     "@sushiswap/default-token-list": "^41.4.0",
     "@taquito/ledger-signer": "^17.0.0",
@@ -74,6 +73,7 @@
     "ethereumjs-util": "7.1.4",
     "ethereumjs-wallet": "^1.0.2",
     "ethers": "^5.7.0",
+    "hdkey": "2.0.1",
     "isomorphic-dompurify": "^0.15.0",
     "js-sha256": "^0.10.1",
     "lodash.startcase": "^4.4.0",

@@ -45,6 +45,7 @@ export type WalletOptions = MnemonicWalletOptions | LedgerOptions;
 
 export interface SigningWallet {
   signTransaction: (tx: string) => Promise<string>;
+  signMessage?: (tx: string) => Promise<string>;
   getAddress: () => Promise<string>;
   getAdditionalAddresses: () => Promise<AdditionalAddresses>;
 }
