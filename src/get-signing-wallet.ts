@@ -166,8 +166,8 @@ const evmSigningWallet = async (
 ): Promise<SigningWallet> => {
   const wallet = await getEthereumWallet(options);
   return {
-    signTransaction: (tx) => wallet.signTransaction(JSON.parse(tx)),
     signMessage: (tx) => wallet.signMessage(tx),
+    signTransaction: (tx) => wallet.signTransaction(JSON.parse(tx)),
     getAddress: () => wallet.getAddress(),
     getAdditionalAddresses: async () => ({}),
   };
