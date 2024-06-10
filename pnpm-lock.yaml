@@ -101,8 +101,8 @@ importers:
         specifier: 1.52.0
         version: 1.52.0(bufferutil@4.0.8)(react-native@0.73.6(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(bufferutil@4.0.8)(react@18.2.0)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
       '@stakekit/common':
-        specifier: ^0.0.30
-        version: 0.0.30
+        specifier: ^0.0.31
+        version: 0.0.31
       '@substrate/txwrapper-polkadot':
         specifier: ^7.1.1
         version: 7.2.0(@polkadot/util-crypto@12.6.2(@polkadot/util@12.6.2))(@polkadot/util@12.6.2)(bufferutil@4.0.8)(utf-8-validate@5.0.10)
@@ -2299,8 +2299,8 @@ packages:
   '@stablelib/xsalsa20@1.0.2':
     resolution: {integrity: sha512-7XdBGbcNgBShmuhDXv1G1WPVCkjZdkb1oPMzSidO7Fve0MHntH6TjFkj5bfLI+aRE+61weO076vYpP/jmaAYog==}
 
-  '@stakekit/common@0.0.30':
-    resolution: {integrity: sha512-1XsrSTOEq/Djesr66HtFLozR55GVQczQKqfJEHGgLEweVy4cG+RnR/iamPkZG0wB0d6gyuaKC3Tj0KrIMVDJRQ==}
+  '@stakekit/common@0.0.31':
+    resolution: {integrity: sha512-0qO0daSNSUcqo845ddFZ9xt8WO2jzAtyM0GjbFMX41N2R0m67DnM30iZOg/1YXH2s1lFnH6RtB5p1jU32reJvQ==}
 
   '@substrate/connect-extension-protocol@2.0.0':
     resolution: {integrity: sha512-nKu8pDrE3LNCEgJjZe1iGXzaD6OSIDD4Xzz/yo4KO9mQ6LBvf49BVrt4qxBFGL6++NneLiWUZGoh+VSd4PyVIg==}
@@ -5935,6 +5935,9 @@ packages:
   node-addon-api@3.2.1:
     resolution: {integrity: sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==}
 
+  node-addon-api@4.3.0:
+    resolution: {integrity: sha512-73sE9+3UaLYYFmDsFZnqCInzPyh3MqIwZO9cw58yIqAZhONrrabrYyYe3TuIqtIiOuTXVhsGau8hcrhhwSsDIQ==}
+
   node-addon-api@6.1.0:
     resolution: {integrity: sha512-+eawOlIgy680F0kBzPUNFhMZGtJ1YmqM6l4+Crf4IkImjYrO/mqPwRMh352g23uIaQKFItcQ64I7KMaJxHgAVA==}
 
@@ -5970,6 +5973,10 @@ packages:
 
   node-gyp-build@4.8.0:
     resolution: {integrity: sha512-u6fs2AEUljNho3EYTJNBfImO5QTo/J/1Etd+NVdCj7qWKUSN/bSLkZwhDv7I+w/MSC6qJ4cknepkAYykDdK8og==}
+    hasBin: true
+
+  node-gyp-build@4.8.1:
+    resolution: {integrity: sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==}
     hasBin: true
 
   node-hid@2.1.1:
@@ -7482,6 +7489,10 @@ packages:
 
   url@0.11.3:
     resolution: {integrity: sha512-6hxOLGfZASQK/cijlZnZJTq8OXAkt/3YGfQX45vvMYXpZoo8NdWZcY73K108Jf759lS1Bv/8wXnHDTSz17dSRw==}
+
+  usb@1.9.2:
+    resolution: {integrity: sha512-dryNz030LWBPAf6gj8vyq0Iev3vPbCLHCT8dBw3gQRXRzVNsIdeuU+VjPp3ksmSPkeMAl1k+kQ14Ij0QHyeiAg==}
+    engines: {node: '>=10.16.0'}
 
   usb@2.9.0:
     resolution: {integrity: sha512-G0I/fPgfHUzWH8xo2KkDxTTFruUWfppgSFJ+bQxz/kVY2x15EQ/XDB7dqD1G432G4gBG4jYQuF3U7j/orSs5nw==}
@@ -10757,7 +10768,7 @@ snapshots:
       '@ledgerhq/logs': 5.50.0
       lodash: 4.17.21
       node-hid: 2.1.1
-      usb: 2.9.0
+      usb: 1.9.2
     optional: true
 
   '@ledgerhq/hw-transport-node-hid@6.28.4':
@@ -11826,7 +11837,7 @@ snapshots:
       '@stablelib/salsa20': 1.0.2
       '@stablelib/wipe': 1.0.1
 
-  '@stakekit/common@0.0.30': {}
+  '@stakekit/common@0.0.31': {}
 
   '@substrate/connect-extension-protocol@2.0.0':
     optional: true
@@ -16766,6 +16777,9 @@ snapshots:
 
   node-addon-api@3.2.1: {}
 
+  node-addon-api@4.3.0:
+    optional: true
+
   node-addon-api@6.1.0: {}
 
   node-dir@0.1.17:
@@ -16789,6 +16803,9 @@ snapshots:
       formdata-polyfill: 4.0.10
 
   node-gyp-build@4.8.0: {}
+
+  node-gyp-build@4.8.1:
+    optional: true
 
   node-hid@2.1.1:
     dependencies:
@@ -18520,6 +18537,12 @@ snapshots:
     dependencies:
       punycode: 1.4.1
       qs: 6.11.2
+
+  usb@1.9.2:
+    dependencies:
+      node-addon-api: 4.3.0
+      node-gyp-build: 4.8.1
+    optional: true
 
   usb@2.9.0:
     dependencies:
