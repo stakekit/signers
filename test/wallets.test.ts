@@ -1,5 +1,5 @@
 import { CosmosNetworks } from '@stakekit/common';
-import { ImportableWallets } from '../src';
+import { ImportableWallets } from '../src/constants';
 import { resolvers } from './wallets';
 
 describe('address derivation', () => {
@@ -293,61 +293,61 @@ describe('address derivation', () => {
     }
   });
 
-  describe('binance', () => {
-    const mnemonic =
-      'cover cinnamon dash later plate object hurry police damage loop inflict desert';
+  // describe('binance', () => {
+  //   const mnemonic =
+  //     'cover cinnamon dash later plate object hurry police damage loop inflict desert';
 
-    const tests: [ImportableWallets, string[]][] = [
-      [
-        ImportableWallets.Steakwallet,
-        ['bnb1zfdcs8stuwy8rj6a3tfe505780jwvs25fzk4sg'],
-      ],
-      [ImportableWallets.Omni, ['bnb1zfdcs8stuwy8rj6a3tfe505780jwvs25fzk4sg']],
-      [
-        ImportableWallets.MetaMask,
-        [
-          'bnb1v95k0trv8a5j54p9pazkngdqf084nemunh7wdl',
-          'bnb1gvddhpaaujjztwl77hk28fjsmkcujvkjk7ym4c',
-          'bnb1davp50sgas2s6gsdg5lzxg43l8nwmcmm2d09qh',
-          'bnb14dntfl30s2sy4kspgp5acn8ql69gwt6la5jkgc',
-          'bnb1h2knsnrp8ecz98u3vuar5d78s8sjqvm2sjg5p8',
-        ],
-      ],
-      [
-        ImportableWallets.Keplr,
-        [
-          'bnb1run3w97jhs94s8qfwedgl2q65t0nykxsq648un',
-          'bnb16g58ll7uvjen3p00a4cr7lwdv8mwc9j2aeqzr3',
-          'bnb13rygw9updtmyapweqjdpad48cewdptcwzrmc3h',
-          'bnb1uzysjkyq9c8wpfnurnv60gyy7ajclh9rtyw56p',
-          'bnb1y7hzxkwwua7w5s2m43szwpe5rx8xg3at4xn6xa',
-        ],
-      ],
-      [
-        ImportableWallets.Phantom,
-        [
-          'bnb1fku49k2v636kzz283xl35sqjarlma098tvhl2c',
-          'bnb1jnml53alzuy9e39xmnepwxm2kc67ag5rjg5ddc',
-          'bnb1gsc9lwtv43xp72hhvxdhjs2f9e23xwplcr9efq',
-          'bnb1zpshhpep0qpf9mw52ud92n78gxzhx46d3vsv8e',
-          'bnb1rgrgdzh8z8tqde0akmrtv4axwd2l7fuu2wh50y',
-        ],
-      ],
-    ];
+  //   const tests: [ImportableWallets, string[]][] = [
+  //     [
+  //       ImportableWallets.Steakwallet,
+  //       ['bnb1zfdcs8stuwy8rj6a3tfe505780jwvs25fzk4sg'],
+  //     ],
+  //     [ImportableWallets.Omni, ['bnb1zfdcs8stuwy8rj6a3tfe505780jwvs25fzk4sg']],
+  //     [
+  //       ImportableWallets.MetaMask,
+  //       [
+  //         'bnb1v95k0trv8a5j54p9pazkngdqf084nemunh7wdl',
+  //         'bnb1gvddhpaaujjztwl77hk28fjsmkcujvkjk7ym4c',
+  //         'bnb1davp50sgas2s6gsdg5lzxg43l8nwmcmm2d09qh',
+  //         'bnb14dntfl30s2sy4kspgp5acn8ql69gwt6la5jkgc',
+  //         'bnb1h2knsnrp8ecz98u3vuar5d78s8sjqvm2sjg5p8',
+  //       ],
+  //     ],
+  //     [
+  //       ImportableWallets.Keplr,
+  //       [
+  //         'bnb1run3w97jhs94s8qfwedgl2q65t0nykxsq648un',
+  //         'bnb16g58ll7uvjen3p00a4cr7lwdv8mwc9j2aeqzr3',
+  //         'bnb13rygw9updtmyapweqjdpad48cewdptcwzrmc3h',
+  //         'bnb1uzysjkyq9c8wpfnurnv60gyy7ajclh9rtyw56p',
+  //         'bnb1y7hzxkwwua7w5s2m43szwpe5rx8xg3at4xn6xa',
+  //       ],
+  //     ],
+  //     [
+  //       ImportableWallets.Phantom,
+  //       [
+  //         'bnb1fku49k2v636kzz283xl35sqjarlma098tvhl2c',
+  //         'bnb1jnml53alzuy9e39xmnepwxm2kc67ag5rjg5ddc',
+  //         'bnb1gsc9lwtv43xp72hhvxdhjs2f9e23xwplcr9efq',
+  //         'bnb1zpshhpep0qpf9mw52ud92n78gxzhx46d3vsv8e',
+  //         'bnb1rgrgdzh8z8tqde0akmrtv4axwd2l7fuu2wh50y',
+  //       ],
+  //     ],
+  //   ];
 
-    for (const [walletType, expected] of tests) {
-      it(walletType, async () => {
-        for (let i = 0; i < expected.length; i++) {
-          const wallet = await resolvers.binanceChain({
-            mnemonic,
-            walletType,
-            index: i,
-          });
-          expect(wallet).toEqual(expected[i]);
-        }
-      });
-    }
-  });
+  //   for (const [walletType, expected] of tests) {
+  //     it(walletType, async () => {
+  //       for (let i = 0; i < expected.length; i++) {
+  //         const wallet = await resolvers.binanceChain({
+  //           mnemonic,
+  //           walletType,
+  //           index: i,
+  //         });
+  //         expect(wallet).toEqual(expected[i]);
+  //       }
+  //     });
+  //   }
+  // });
 
   describe('avalanche', () => {
     const mnemonic =

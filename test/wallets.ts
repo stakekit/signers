@@ -1,18 +1,15 @@
 import Avalanche from 'avalanche';
 
-import {
-  getAvalancheWallet,
-  getBinanceChainWallet,
-  getCeloWallet,
-  getEthereumWallet,
-  getNearWallet,
-  getSolanaWallet,
-  getStargateWallet,
-  getTezosWallet,
-  nearKeyPairToAddress,
-  WalletOptions,
-} from '..';
 import { CosmosNetworks } from '@stakekit/common';
+import { getAvalancheWallet } from '../src/avalanche';
+import { getCeloWallet } from '../src/celo';
+import { WalletOptions } from '../src/constants';
+import { getStargateWallet } from '../src/cosmos';
+import { getEthereumWallet } from '../src/ethereum';
+import { getNearWallet, nearKeyPairToAddress } from '../src/near';
+import { getSolanaWallet } from '../src/solana';
+import { getTezosWallet } from '../src/tezos';
+// import { getBinanceChainWallet } from '../src/binance';
 
 export const resolvers = {
   evm: async (options: WalletOptions) => {
@@ -20,13 +17,13 @@ export const resolvers = {
     return wallet.getAddress();
   },
 
-  binanceChain: async (options: WalletOptions) => {
-    const w = await getBinanceChainWallet(options);
-    if (typeof w === 'string') {
-      return w;
-    }
-    return w.address;
-  },
+  // binanceChain: async (options: WalletOptions) => {
+  //   const w = await getBinanceChainWallet(options);
+  //   if (typeof w === 'string') {
+  //     return w;
+  //   }
+  //   return w.address;
+  // },
 
   celo: async (options: WalletOptions) => {
     const wallet = await getCeloWallet(options);

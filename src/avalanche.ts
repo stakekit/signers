@@ -17,9 +17,9 @@ import {
   LedgerOptions,
   MnemonicWalletOptions,
   WalletOptions,
-  getEthereumWallet,
   isLedgerOptions,
-} from '.';
+} from './constants';
+import { getEthereumWallet } from './ethereum';
 import { StakeKitAvalancheWallet } from './ledger/avalanche';
 
 const serialization = Serialization.getInstance();
