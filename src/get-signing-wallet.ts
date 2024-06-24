@@ -204,13 +204,15 @@ const tronSigningWallet = async (
   options: WalletOptions,
 ): Promise<SigningWallet> => {
   const wallet = await getTronWallet(options);
+  const address =
+    wallet.defaultAddress.base58 !== false ? wallet.defaultAddress.base58 : '';
 
   return {
     signTransaction: async (tx) => {
       const signedTx = await wallet.trx.sign(JSON.parse(tx));
       return JSON.stringify(signedTx);
     },
-    getAddress: () => wallet.defaultAddress.base58,
+    getAddress: async () => address,
     getAdditionalAddresses: async () => ({}),
   };
 };
