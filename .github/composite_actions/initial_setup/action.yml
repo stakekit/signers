@@ -2,7 +2,7 @@ name: Setup action
 description: Reusable action to setup node and install packages
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Install Node.js
       uses: actions/setup-node@v4
@@ -13,7 +13,7 @@ runs:
       name: Install pnpm
       id: pnpm-install
       with:
-        version: 8.8
+        version: 9.1.4
         run_install: false
 
     - name: Get pnpm store directory
@@ -22,7 +22,7 @@ runs:
         echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
       shell: bash
 
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       name: Setup pnpm cache
       with:
         path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
