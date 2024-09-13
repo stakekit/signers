@@ -478,14 +478,14 @@ const tonSigningWallet = async (
   return {
     signTransaction: async (raw) => {
       const deserialized: Cell = Cell.fromBoc(Buffer.from(raw, 'base64'))[0];
-      const message = loadMessageRelaxed(deserialized.asSlice());
+      const loadedMessage = loadMessageRelaxed(deserialized.asSlice());
 
       const client = getTonClient();
 
-      const opened = client.open(wallet);
-      const seqno: number = await opened.getSeqno();
-      const transfer = opened.createTransfer({
-        messages: [message],
+      const walletContract = client.open(wallet);
+      const seqno: number = await walletContract.getSeqno();
+      const transfer = walletContract.createTransfer({
+        messages: [loadedMessage],
         secretKey: key.secretKey,
         seqno,
         sendMode: SendMode.PAY_GAS_SEPARATELY,
