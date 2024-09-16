@@ -1,6 +1,6 @@
 import { mnemonicToWalletKey } from '@ton/crypto';
 import { WalletContractV4 } from '@ton/ton';
-import { WalletOptions, isLedgerOptions } from './constants';
+import { isLedgerOptions, WalletOptions } from './constants';
 
 export const getTonWallet = async (options: WalletOptions) => {
   if (isLedgerOptions(options)) {
