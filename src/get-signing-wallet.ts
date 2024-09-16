@@ -55,7 +55,7 @@ import {
 } from './solana';
 import { getSubstrateWallet } from './substrate';
 import { getTezosWallet } from './tezos';
-import { getTonClient, getTonWallet } from './ton';
+import { getTonWallet } from './ton';
 import { getTronWallet } from './tron';
 import { incrementDerivationPath } from './utils';
 
@@ -477,17 +477,20 @@ const tonSigningWallet = async (
 
   return {
     signTransaction: async (raw) => {
-      const deserialized: Cell = Cell.fromBoc(Buffer.from(raw, 'base64'))[0];
+      const parsed = JSON.parse(raw) as {
+        message: string;
+        seqno: number;
+      };
+
+      const deserialized: Cell = Cell.fromBoc(
+        Buffer.from(parsed.message, 'base64'),
+      )[0];
       const loadedMessage = loadMessageRelaxed(deserialized.asSlice());
 
-      const client = getTonClient();
-
-      const walletContract = client.open(wallet);
-      const seqno: number = await walletContract.getSeqno();
-      const transfer = walletContract.createTransfer({
+      const transfer = wallet.createTransfer({
         messages: [loadedMessage],
         secretKey: key.secretKey,
-        seqno,
+        seqno: parsed.seqno,
         sendMode: SendMode.PAY_GAS_SEPARATELY,
       });
 
