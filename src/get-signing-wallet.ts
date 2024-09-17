@@ -76,7 +76,7 @@ const avalanchePSigningWallet = async (
   return {
     signTransaction: async (str) => {
       const unsignedTx = UnsignedTx.fromJSON(str);
-      return await wallet.signP(unsignedTx);
+      return await wallet.sign(unsignedTx);
     },
     getAddress: async () => wallet.ethereumAddress,
     getAdditionalAddresses: async () => ({
@@ -96,7 +96,7 @@ const avalancheCAtomicSigningWallet = async (
   return {
     signTransaction: async (str) => {
       const unsignedTx = EVMUnsignedTx.fromJSON(str);
-      return await wallet.signC(unsignedTx);
+      return await wallet.sign(unsignedTx);
     },
     getAddress: async () => wallet.ethereumAddress,
     getAdditionalAddresses: async () => ({

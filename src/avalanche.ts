@@ -52,8 +52,7 @@ const getMnemonicWallet = async (
 
   return {
     ethereumAddress: await wallet.getAddress(),
-    signC: async (tx: EVMUnsignedTx) => sign(tx, wallet.privateKey),
-    signP: async (tx: UnsignedTx) => sign(tx, wallet.privateKey),
+    sign: async (tx: EVMUnsignedTx | UnsignedTx) => sign(tx, wallet.privateKey),
     getEthereumAddress: () => wallet.getAddress(),
     getCAddressString: () => utils.format('C', 'avax', ripemd160Hash),
     getPAddressString: () => utils.format('P', 'avax', ripemd160Hash),
