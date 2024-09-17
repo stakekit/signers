@@ -145,7 +145,6 @@ export enum LedgerApps {
   NEAR = 'NEAR',
   Tezos = 'Tezos',
   Solana = 'Solana',
-  Avalanche = 'Avalanche',
   Binance = 'Binance',
 }
 
@@ -154,7 +153,6 @@ export const defaultLedgerDerivationPaths: { [x in LedgerApps]: string } = {
   [LedgerApps.Cosmos]: keplrPath(0),
   [LedgerApps.NEAR]: "44'/397'/0'/0'/0'",
   [LedgerApps.Tezos]: "44'/1729'/0'/0'",
-  [LedgerApps.Avalanche]: "m/44'/9000'/0'",
   [LedgerApps.Binance]: "44/714/0/0/0'",
   [LedgerApps.Solana]: phantomPath(0),
 };
