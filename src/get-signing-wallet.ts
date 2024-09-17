@@ -45,7 +45,7 @@ import { getTezosWallet } from './tezos';
 import { getTonWallet } from './ton';
 import { getTronWallet } from './tron';
 import { incrementDerivationPath } from './utils';
-import { UnsignedTx } from '@avalabs/avalanchejs';
+import { EVMUnsignedTx, UnsignedTx } from '@avalabs/avalanchejs';
 
 const avalancheCSigningWallet = async (
   options: WalletOptions,
@@ -95,7 +95,7 @@ const avalancheCAtomicSigningWallet = async (
   }
   return {
     signTransaction: async (str) => {
-      const unsignedTx = UnsignedTx.fromJSON(str);
+      const unsignedTx = EVMUnsignedTx.fromJSON(str);
       return await wallet.signC(unsignedTx);
     },
     getAddress: async () => wallet.ethereumAddress,

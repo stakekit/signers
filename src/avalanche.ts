@@ -1,5 +1,6 @@
 import {
   addTxSignatures,
+  EVMUnsignedTx,
   secp256k1,
   UnsignedTx,
   utils,
@@ -16,14 +17,18 @@ import {
 import { getEthereumWallet } from './ethereum';
 import { createHash } from 'crypto';
 
-const sign = async (tx: UnsignedTx, privateKey: string): Promise<string> => {
+const sign = async (
+  tx: EVMUnsignedTx | UnsignedTx,
+  privateKey: string,
+): Promise<string> => {
   await addTxSignatures({
     unsignedTx: tx,
     privateKeys: [utils.hexToBuffer(privateKey)],
   });
 
-  return utils.bufferToHex(tx.getSignedTx().toBytes());
+  return utils.bufferToHex(utils.addChecksum(tx.getSignedTx().toBytes()));
 };
+
 const getMnemonicWallet = async (
   options: MnemonicWalletOptions,
 ): Promise<any> => {
@@ -47,7 +52,7 @@ const getMnemonicWallet = async (
 
   return {
     ethereumAddress: await wallet.getAddress(),
-    signC: async (tx: UnsignedTx) => sign(tx, wallet.privateKey),
+    signC: async (tx: EVMUnsignedTx) => sign(tx, wallet.privateKey),
     signP: async (tx: UnsignedTx) => sign(tx, wallet.privateKey),
     getEthereumAddress: () => wallet.getAddress(),
     getCAddressString: () => utils.format('C', 'avax', ripemd160Hash),
