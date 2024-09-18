@@ -12,15 +12,10 @@ import {
 } from '@taquito/ledger-signer';
 
 import { LedgerApps } from '../constants';
-import { getAppAvax } from '@avalabs/avalanche-wallet-sdk';
 
 const resolver: {
   [x in LedgerApps]: (transport: Transport) => Promise<boolean>;
 } = {
-  [LedgerApps.Avalanche]: async (t) => {
-    const app = getAppAvax(t, 'zondax');
-    return !!(await app.getAppConfiguration);
-  },
   [LedgerApps.Ethereum]: async (t) => {
     const app = new EthLedgerApp(t);
     return !!(await app.getAppConfiguration());
