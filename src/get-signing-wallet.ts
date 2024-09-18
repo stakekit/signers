@@ -21,7 +21,6 @@ import {
   createMetadata,
   getRegistry,
 } from '@substrate/txwrapper-polkadot';
-import { Cell, SendMode, loadMessageRelaxed } from '@ton/ton';
 import { Avalanche, Buffer as Buf } from 'avalanche';
 import {
   EVMInput,
@@ -55,7 +54,7 @@ import {
 } from './solana';
 import { getSubstrateWallet } from './substrate';
 import { getTezosWallet } from './tezos';
-import { getTonWallet } from './ton';
+import { buildSignedMessageFromRaw, getTonWallet } from './ton';
 import { getTronWallet } from './tron';
 import { incrementDerivationPath } from './utils';
 
@@ -473,29 +472,11 @@ const solanaSigningWallet = async (
 const tonSigningWallet = async (
   options: WalletOptions,
 ): Promise<SigningWallet> => {
-  const { wallet, key } = await getTonWallet(options);
+  const { wallet, keypair } = await getTonWallet(options);
 
   return {
-    signTransaction: async (raw) => {
-      const parsed = JSON.parse(raw) as {
-        message: string;
-        seqno: number;
-      };
-
-      const deserialized: Cell = Cell.fromBoc(
-        Buffer.from(parsed.message, 'base64'),
-      )[0];
-      const loadedMessage = loadMessageRelaxed(deserialized.asSlice());
-
-      const transfer = wallet.createTransfer({
-        messages: [loadedMessage],
-        secretKey: key.secretKey,
-        seqno: parsed.seqno,
-        sendMode: SendMode.PAY_GAS_SEPARATELY,
-      });
-
-      return transfer.toBoc().toString('base64');
-    },
+    signTransaction: async (raw) =>
+      buildSignedMessageFromRaw(raw, wallet, keypair),
     getAddress: async () => wallet.address.toString({ bounceable: false }),
     getAdditionalAddresses: async () => ({}),
   };
