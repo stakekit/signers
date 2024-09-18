@@ -1,3 +1,4 @@
+import { EVMUnsignedTx, UnsignedTx } from '@avalabs/avalanchejs';
 import { Transaction as BinanceTransaction } from '@binance-chain/javascript-sdk';
 import { fromBase64 } from '@cosmjs/encoding';
 import { isOfflineDirectSigner } from '@cosmjs/proto-signing';
@@ -20,7 +21,6 @@ import {
   createMetadata,
   getRegistry,
 } from '@substrate/txwrapper-polkadot';
-import { Cell, SendMode, loadMessageRelaxed } from '@ton/ton';
 import { SignDoc, TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { Transaction, signTransaction } from 'near-api-js/lib/transaction';
 import { getAvalancheWallet } from './avalanche';
@@ -42,10 +42,9 @@ import {
 } from './solana';
 import { getSubstrateWallet } from './substrate';
 import { getTezosWallet } from './tezos';
-import { getTonWallet } from './ton';
+import { buildSignedMessageFromRaw, getTonWallet } from './ton';
 import { getTronWallet } from './tron';
 import { incrementDerivationPath } from './utils';
-import { EVMUnsignedTx, UnsignedTx } from '@avalabs/avalanchejs';
 
 const avalancheCSigningWallet = async (
   options: WalletOptions,
@@ -416,29 +415,11 @@ const solanaSigningWallet = async (
 const tonSigningWallet = async (
   options: WalletOptions,
 ): Promise<SigningWallet> => {
-  const { wallet, key } = await getTonWallet(options);
+  const { wallet, keypair } = await getTonWallet(options);
 
   return {
-    signTransaction: async (raw) => {
-      const parsed = JSON.parse(raw) as {
-        message: string;
-        seqno: number;
-      };
-
-      const deserialized: Cell = Cell.fromBoc(
-        Buffer.from(parsed.message, 'base64'),
-      )[0];
-      const loadedMessage = loadMessageRelaxed(deserialized.asSlice());
-
-      const transfer = wallet.createTransfer({
-        messages: [loadedMessage],
-        secretKey: key.secretKey,
-        seqno: parsed.seqno,
-        sendMode: SendMode.PAY_GAS_SEPARATELY,
-      });
-
-      return transfer.toBoc().toString('base64');
-    },
+    signTransaction: async (raw) =>
+      buildSignedMessageFromRaw(raw, wallet, keypair),
     getAddress: async () => wallet.address.toString({ bounceable: false }),
     getAdditionalAddresses: async () => ({}),
   };
