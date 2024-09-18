@@ -7,7 +7,6 @@ import {
   StakeProgram,
 } from '@solana/web3.js';
 import {
-  AvalancheUnsignedTransactionSerialized,
   CosmosNetworks,
   EvmNetworks,
   Networks,
@@ -22,18 +21,6 @@ import {
   getRegistry,
 } from '@substrate/txwrapper-polkadot';
 import { Cell, SendMode, loadMessageRelaxed } from '@ton/ton';
-import { Avalanche, Buffer as Buf } from 'avalanche';
-import {
-  EVMInput,
-  EVMOutput,
-  Tx as EvmTx,
-  UnsignedTx as UnsignedEvmTx,
-} from 'avalanche/dist/apis/evm';
-import {
-  Tx as PTx,
-  UnsignedTx as UnsignedPtx,
-} from 'avalanche/dist/apis/platformvm';
-import { SigIdx } from 'avalanche/dist/common';
 import { SignDoc, TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { Transaction, signTransaction } from 'near-api-js/lib/transaction';
 import { getAvalancheWallet } from './avalanche';
@@ -58,11 +45,12 @@ import { getTezosWallet } from './tezos';
 import { getTonWallet } from './ton';
 import { getTronWallet } from './tron';
 import { incrementDerivationPath } from './utils';
+import { EVMUnsignedTx, UnsignedTx } from '@avalabs/avalanchejs';
 
 const avalancheCSigningWallet = async (
   options: WalletOptions,
 ): Promise<SigningWallet> => {
-  const avalancheWallet = await getAvalancheWallet(new Avalanche(), options);
+  const avalancheWallet = await getAvalancheWallet(options);
   const wallet = await getEthereumWallet(options);
   if (avalancheWallet === null) {
     throw new Error('Wallet not initialised');
@@ -80,21 +68,15 @@ const avalancheCSigningWallet = async (
 const avalanchePSigningWallet = async (
   options: WalletOptions,
 ): Promise<SigningWallet> => {
-  const wallet = await getAvalancheWallet(new Avalanche(), options);
+  const wallet = await getAvalancheWallet(options);
   if (wallet === null) {
     throw new Error('Wallet not initialised');
   }
 
   return {
     signTransaction: async (str) => {
-      const { buffer }: AvalancheUnsignedTransactionSerialized =
-        JSON.parse(str);
-
-      const unsignedTx = new UnsignedPtx();
-      unsignedTx.deserialize(JSON.parse(Buffer.from(buffer, 'hex').toString()));
-
-      const signed: PTx = await wallet.signP(unsignedTx);
-      return signed.toStringHex();
+      const unsignedTx = UnsignedTx.fromJSON(str);
+      return await wallet.sign(unsignedTx);
     },
     getAddress: async () => wallet.ethereumAddress,
     getAdditionalAddresses: async () => ({
@@ -107,53 +89,14 @@ const avalanchePSigningWallet = async (
 const avalancheCAtomicSigningWallet = async (
   options: WalletOptions,
 ): Promise<SigningWallet> => {
-  const wallet = await getAvalancheWallet(new Avalanche(), options);
+  const wallet = await getAvalancheWallet(options);
   if (wallet === null) {
     throw new Error('Wallet not initialised');
   }
   return {
     signTransaction: async (str) => {
-      const {
-        buffer,
-        inputs,
-        sigIdxs,
-        outputs,
-      }: AvalancheUnsignedTransactionSerialized = JSON.parse(str);
-      const unsignedTx = new UnsignedEvmTx();
-      unsignedTx.deserialize(JSON.parse(Buf.from(buffer, 'hex').toString()));
-
-      if (inputs !== undefined && sigIdxs !== undefined) {
-        const newInput = new EVMInput();
-        newInput.fromBuffer(Buf.from(inputs, 'hex'));
-
-        const parsedSigIdxs = sigIdxs.map((sigIdxs: string) => {
-          const newSigIdxs = new SigIdx();
-          newSigIdxs.deserialize(
-            JSON.parse(Buf.from(sigIdxs, 'hex').toString()),
-          );
-          return newSigIdxs;
-        });
-        //@ts-ignore
-        newInput.sigIdxs.push(...parsedSigIdxs);
-
-        //@ts-ignore
-        unsignedTx['transaction']['inputs'].push(newInput);
-      }
-
-      if (outputs !== undefined) {
-        const newOutput = new EVMOutput();
-        newOutput.fromBuffer(Buf.from(outputs, 'hex'));
-
-        //@ts-ignore
-        unsignedTx['transaction']['outs'].push(newOutput);
-        // NOTE: We do this because when serializing, the numIns gets changed.
-        // This way we reset the transaction back to the original state.
-        //@ts-ignore
-        unsignedTx['transaction']['numIns'] = Buffer.alloc(4);
-      }
-
-      const signed: EvmTx = await wallet.signC(unsignedTx);
-      return signed.toStringHex();
+      const unsignedTx = EVMUnsignedTx.fromJSON(str);
+      return await wallet.sign(unsignedTx);
     },
     getAddress: async () => wallet.ethereumAddress,
     getAdditionalAddresses: async () => ({

@@ -1,5 +1,3 @@
-import Avalanche from 'avalanche';
-
 import { CosmosNetworks } from '@stakekit/common';
 import { getAvalancheWallet } from '../src/avalanche';
 import { getBinanceChainWallet } from '../src/binance';
@@ -55,7 +53,7 @@ export const resolvers = {
   },
 
   avalanche: async (options: WalletOptions) => {
-    const wallet = await getAvalancheWallet(new Avalanche('', 1), options);
+    const wallet = await getAvalancheWallet(options);
     return {
       ethereumAddress: wallet?.ethereumAddress,
       cAddressBech: wallet?.getCAddressString(),

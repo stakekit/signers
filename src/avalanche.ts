@@ -1,98 +1,37 @@
-import { Avalanche, Buffer } from 'avalanche/dist';
 import {
-  EVMAPI,
-  Tx as EvmTx,
-  UnsignedTx as UnsignedEvmTx,
-} from 'avalanche/dist/apis/evm';
-import {
-  Tx as PlatformTx,
-  PlatformVMAPI,
-  UnsignedTx as UnsignedPlatformTx,
-} from 'avalanche/dist/apis/platformvm';
-import { Serialization } from 'avalanche/dist/utils';
+  addTxSignatures,
+  EVMUnsignedTx,
+  secp256k1,
+  UnsignedTx,
+  utils,
+} from '@avalabs/avalanchejs';
+
 import { ethers } from 'ethers';
 
 import {
-  LedgerApps,
   LedgerOptions,
   MnemonicWalletOptions,
   WalletOptions,
   isLedgerOptions,
 } from './constants';
 import { getEthereumWallet } from './ethereum';
-import { StakeKitAvalancheWallet } from './ledger/avalanche';
+import { createHash } from 'crypto';
 
-const serialization = Serialization.getInstance();
+const sign = async (
+  tx: EVMUnsignedTx | UnsignedTx,
+  privateKey: string,
+): Promise<string> => {
+  await addTxSignatures({
+    unsignedTx: tx,
+    privateKeys: [utils.hexToBuffer(privateKey)],
+  });
 
-export interface AvalancheKeyChains {
-  ethereumAddress: string;
-
-  cchain: EVMAPI;
-  pchain: PlatformVMAPI;
-  getEthereumAddress: () => Promise<string>;
-  getCAddressString: () => string;
-  getCAddressStrings: () => string[];
-  getPAddressString: () => string;
-  getPAddressBuffer: () => Buffer;
-  getPAddressStrings: () => string[];
-  getPAddressBuffers: () => Buffer[];
-
-  signC: (tx: UnsignedEvmTx) => Promise<EvmTx>;
-  signP: (tx: UnsignedPlatformTx) => Promise<PlatformTx>;
-}
-
-const getLedgerWallet = async (
-  avalanche: Avalanche,
-  options: LedgerOptions,
-): Promise<AvalancheKeyChains | null> => {
-  const transport = await options.transport(LedgerApps.Avalanche);
-  const ledgerWallet = await StakeKitAvalancheWallet.fromStakeKitTransport(
-    transport,
-    options.config.Avalanche?.derivationPath as string,
-    options.config.Ethereum?.derivationPath as string,
-  );
-
-  if (ledgerWallet === undefined) {
-    return null;
-  }
-
-  const ethereumAddress = ledgerWallet.getAddressC();
-  const cAddressBech = ledgerWallet.getEvmAddressBech();
-  const pAddressBech = ledgerWallet.getAddressP();
-
-  const pchain = avalanche.PChain();
-  const cchain = avalanche.CChain();
-
-  const pAddressBuffer = serialization.typeToBuffer(
-    pAddressBech,
-    'bech32',
-    avalanche.getHRP(),
-    1,
-  );
-
-  return {
-    cchain,
-    pchain,
-
-    ethereumAddress,
-
-    signC: (tx: UnsignedEvmTx) => ledgerWallet.signC(tx),
-    signP: (tx: UnsignedPlatformTx) => ledgerWallet.signP(tx),
-
-    getEthereumAddress: async () => ethereumAddress,
-    getCAddressString: () => cAddressBech,
-    getCAddressStrings: () => [cAddressBech],
-    getPAddressString: () => pAddressBech,
-    getPAddressStrings: () => [pAddressBech],
-    getPAddressBuffer: () => pAddressBuffer,
-    getPAddressBuffers: () => [pAddressBuffer],
-  };
+  return utils.bufferToHex(utils.addChecksum(tx.getSignedTx().toBytes()));
 };
 
 const getMnemonicWallet = async (
-  avalanche: Avalanche,
   options: MnemonicWalletOptions,
-): Promise<AvalancheKeyChains | null> => {
+): Promise<any> => {
   if (!options.mnemonic) {
     return null;
   }
@@ -103,35 +42,28 @@ const getMnemonicWallet = async (
     return null;
   }
 
-  const pchain = avalanche.PChain();
-  const cchain = avalanche.CChain();
-  cchain.keyChain().importKey(Buffer.from(wallet.privateKey.slice(2), 'hex'));
-  pchain.keyChain().importKey(Buffer.from(wallet.privateKey.slice(2), 'hex'));
+  const privateKeyBuffer = utils.hexToBuffer(wallet.privateKey);
+
+  // Generate the public key from the private key using secp256k1
+  const publicKeyBuffer = secp256k1.getPublicKey(privateKeyBuffer);
+
+  const sha256Hash = createHash('sha256').update(publicKeyBuffer).digest();
+  const ripemd160Hash = createHash('ripemd160').update(sha256Hash).digest();
 
   return {
-    cchain,
-    pchain,
     ethereumAddress: await wallet.getAddress(),
-
-    signC: async (tx: UnsignedEvmTx) => tx.sign(cchain.keyChain()),
-    signP: async (tx: UnsignedPlatformTx) => tx.sign(pchain.keyChain()),
-
+    sign: async (tx: EVMUnsignedTx | UnsignedTx) => sign(tx, wallet.privateKey),
     getEthereumAddress: () => wallet.getAddress(),
-    getCAddressString: () => cchain.keyChain().getAddressStrings()[0],
-    getCAddressStrings: () => cchain.keyChain().getAddressStrings(),
-    getPAddressString: () => pchain.keyChain().getAddressStrings()[0],
-    getPAddressStrings: () => pchain.keyChain().getAddressStrings(),
-    getPAddressBuffers: () => pchain.keyChain().getAddresses(),
-    getPAddressBuffer: () => pchain.keyChain().getAddresses()[0],
+    getCAddressString: () => utils.format('C', 'avax', ripemd160Hash),
+    getPAddressString: () => utils.format('P', 'avax', ripemd160Hash),
   };
 };
 
-export const getAvalancheWallet = (
-  avalanche: Avalanche,
-  options: WalletOptions | LedgerOptions,
-) => {
+export const getAvalancheWallet = (options: WalletOptions | LedgerOptions) => {
   if (isLedgerOptions(options)) {
-    return getLedgerWallet(avalanche, options);
+    // TODO add ledger support
+    throw new Error('Ledger mode is not supported.');
   }
-  return getMnemonicWallet(avalanche, options);
+
+  return getMnemonicWallet(options);
 };
