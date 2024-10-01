@@ -1,6 +1,6 @@
 {
   "name": "@stakekit/signers",
-  "version": "0.0.82",
+  "version": "0.0.83",
   "scripts": {
     "clean": "rm -rf lib",
     "lint": "eslint \"src/**/*.ts\"",
@@ -20,6 +20,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@anchor-protocol/anchor.js": "^5.0.2",
+    "@avalabs/avalanchejs": "4.0.5",
     "@binance-chain/javascript-sdk": "^4.2.0",
     "@cosmjs/amino": "^0.32.2",
     "@cosmjs/cosmwasm-stargate": "^0.32.2",
@@ -47,7 +48,7 @@
     "@solana/buffer-layout": "^4.0.0",
     "@solana/spl-token": "^0.3.4",
     "@solana/web3.js": "1.52.0",
-    "@stakekit/common": "^0.0.34",
+    "@stakekit/common": "^0.0.38",
     "@substrate/txwrapper-polkadot": "^7.1.1",
     "@sushiswap/default-token-list": "^41.4.0",
     "@taquito/ledger-signer": "^17.0.0",
@@ -59,7 +60,6 @@
     "@ton/core": "^0.57.0",
     "@ton/crypto": "^3.3.0",
     "@ton/ton": "^15.0.0",
-    "@avalabs/avalanchejs": "4.0.5",
     "axios": "0.27.2",
     "bignumber.js": "^9.0.1",
     "bip32": "^2.0.6",
