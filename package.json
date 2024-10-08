@@ -1,6 +1,6 @@
 {
   "name": "@stakekit/signers",
-  "version": "0.0.84",
+  "version": "0.0.85",
   "scripts": {
     "clean": "rm -rf lib",
     "lint": "eslint \"src/**/*.ts\"",
@@ -40,6 +40,7 @@
     "@ledgerhq/hw-transport": "^6.30.4",
     "@ledgerhq/hw-transport-node-hid": "^6.28.4",
     "@ledgerhq/types-live": "^6.45.0",
+    "@meshsdk/core": "^1.7.8",
     "@metamask/eth-sig-util": "^4.0.1",
     "@polkadot/api": "^10.10.1",
     "@polkadot/keyring": "^12.6.2",
