@@ -101,8 +101,8 @@ dependencies:
     specifier: 1.52.0
     version: 1.52.0(react-native@0.73.5)
   '@stakekit/common':
-    specifier: ^0.0.39
-    version: 0.0.39
+    specifier: ^0.0.41
+    version: 0.0.41
   '@substrate/txwrapper-polkadot':
     specifier: ^7.1.1
     version: 7.2.0(@polkadot/util-crypto@12.6.2)(@polkadot/util@12.6.2)
@@ -4484,8 +4484,8 @@ packages:
       '@stablelib/wipe': 1.0.1
     dev: false
 
-  /@stakekit/common@0.0.39:
-    resolution: {integrity: sha512-QK7n2naFNPTonB5rbdb+5FC6m/OH6Q2yH+PRSfcGx5hFbv35KSyU//Eg92cHAHTuzHTgIn/mXqvvhCBphewOoQ==}
+  /@stakekit/common@0.0.41:
+    resolution: {integrity: sha512-fvbEverQ88roMhwfq6cJyuLcMzPBNCB09SIaq8vbCz6iFamfO8i+1Sm35yHvxsk0s+8Kmj5z2Uz0j9JS+lqCCg==}
     dev: false
 
   /@substrate/connect-extension-protocol@2.0.0:
