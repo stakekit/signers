@@ -17,11 +17,14 @@ export const getTonWallet = async (options: WalletOptions) => {
 
   const { mnemonic } = options;
   const keypair = await mnemonicToWalletKey(mnemonic.split(' '));
+
+  const wallet = WalletContractV4.create({
+    publicKey: keypair.publicKey,
+    workchain: 0,
+  });
+
   return {
-    wallet: WalletContractV4.create({
-      publicKey: keypair.publicKey,
-      workchain: 0,
-    }),
+    wallet,
     keypair,
   };
 };

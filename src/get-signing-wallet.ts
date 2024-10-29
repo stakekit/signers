@@ -414,13 +414,19 @@ const solanaSigningWallet = async (
 
 const tonSigningWallet = async (
   options: WalletOptions,
+  isTestnet: boolean = false,
 ): Promise<SigningWallet> => {
   const { wallet, keypair } = await getTonWallet(options);
 
   return {
     signTransaction: async (raw) =>
       buildSignedMessageFromRaw(raw, wallet, keypair),
-    getAddress: async () => wallet.address.toString({ bounceable: false }),
+    getAddress: async () =>
+      wallet.address.toString({
+        urlSafe: true,
+        bounceable: false,
+        testOnly: isTestnet,
+      }),
     getAdditionalAddresses: async () => ({}),
   };
 };
@@ -462,6 +468,7 @@ const getters: {
     {},
   ),
   [Networks.Ton]: tonSigningWallet,
+  [Networks.TonTestnet]: (o: WalletOptions) => tonSigningWallet(o, true),
 };
 
 export const getSigningWallet = async (

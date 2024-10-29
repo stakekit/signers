@@ -1,6 +1,6 @@
 {
   "name": "@stakekit/signers",
-  "version": "0.0.86",
+  "version": "0.0.87",
   "scripts": {
     "clean": "rm -rf lib",
     "lint": "eslint \"src/**/*.ts\"",
@@ -48,7 +48,7 @@
     "@solana/buffer-layout": "^4.0.0",
     "@solana/spl-token": "^0.3.4",
     "@solana/web3.js": "1.52.0",
-    "@stakekit/common": "^0.0.41",
+    "@stakekit/common": "^0.0.42",
     "@substrate/txwrapper-polkadot": "^7.1.1",
     "@sushiswap/default-token-list": "^41.4.0",
     "@taquito/ledger-signer": "^17.0.0",
@@ -59,7 +59,7 @@
     "@taquito/utils": "^17.0.0",
     "@ton/core": "^0.57.0",
     "@ton/crypto": "^3.3.0",
-    "@ton/ton": "^15.0.0",
+    "@ton/ton": "^15.1.0",
     "axios": "0.27.2",
     "bignumber.js": "^9.0.1",
     "bip32": "^2.0.6",
