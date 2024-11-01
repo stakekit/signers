@@ -107,8 +107,8 @@ importers:
         specifier: 1.52.0
         version: 1.52.0(bufferutil@4.0.8)(react-native@0.73.5(@babel/core@7.24.0)(@babel/preset-env@7.24.0(@babel/core@7.24.0))(bufferutil@4.0.8)(react@18.2.0)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
       '@stakekit/common':
-        specifier: ^0.0.39
-        version: 0.0.39
+        specifier: ^0.0.44
+        version: 0.0.44
       '@substrate/txwrapper-polkadot':
         specifier: ^7.1.1
         version: 7.2.0(@polkadot/util-crypto@12.6.2(@polkadot/util@12.6.2))(@polkadot/util@12.6.2)(bufferutil@4.0.8)(utf-8-validate@5.0.10)
@@ -140,8 +140,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0
       '@ton/ton':
-        specifier: ^15.0.0
-        version: 15.0.0(@ton/core@0.57.0(@ton/crypto@3.3.0))(@ton/crypto@3.3.0)
+        specifier: ^15.1.0
+        version: 15.1.0(@ton/core@0.57.0(@ton/crypto@3.3.0))(@ton/crypto@3.3.0)
       axios:
         specifier: 0.27.2
         version: 0.27.2
@@ -2220,8 +2220,8 @@ packages:
   '@stablelib/xsalsa20@1.0.2':
     resolution: {integrity: sha512-7XdBGbcNgBShmuhDXv1G1WPVCkjZdkb1oPMzSidO7Fve0MHntH6TjFkj5bfLI+aRE+61weO076vYpP/jmaAYog==}
 
-  '@stakekit/common@0.0.39':
-    resolution: {integrity: sha512-QK7n2naFNPTonB5rbdb+5FC6m/OH6Q2yH+PRSfcGx5hFbv35KSyU//Eg92cHAHTuzHTgIn/mXqvvhCBphewOoQ==}
+  '@stakekit/common@0.0.44':
+    resolution: {integrity: sha512-4Pc7ZHHscIdJVOPttSk1nNW/YbUu1aRZrpb7xS8cQEYGoBXPvMzFNJSsniLIYYYXtdmypmZrNXEoZdF77Oh2tQ==}
 
   '@stricahq/bip32ed25519@1.1.0':
     resolution: {integrity: sha512-G3OEjxaqvTCzEGppmI9arMrKzl44poVXWTVlQgLILI39EtG/mDWQguN+wJ9m+9TOIxPBlz/10TLKrV+WVH91uw==}
@@ -2326,10 +2326,10 @@ packages:
   '@ton/crypto@3.3.0':
     resolution: {integrity: sha512-/A6CYGgA/H36OZ9BbTaGerKtzWp50rg67ZCH2oIjV1NcrBaCK9Z343M+CxedvM7Haf3f/Ee9EhxyeTp0GKMUpA==}
 
-  '@ton/ton@15.0.0':
-    resolution: {integrity: sha512-0xBivkN0u0+vczt3mKJrx5yqkCxRR00wM8gXCmN/eOzzHKXRFWDEjJp8EEs5J/mq1Op/OhCOFExmOZkr58wgOA==}
+  '@ton/ton@15.1.0':
+    resolution: {integrity: sha512-almetcfTu7jLjcNcEEPB7wAc8yl90ES1M//sOr1QE+kv7RbmEvMkaPSc7kFxzs10qrjIPKxlodBJlMSWP5LuVQ==}
     peerDependencies:
-      '@ton/core': '>=0.56.0'
+      '@ton/core': '>=0.59.0'
       '@ton/crypto': '>=3.2.0'
 
   '@tootallnate/once@1.1.2':
@@ -2856,9 +2856,6 @@ packages:
 
   axios@0.28.1:
     resolution: {integrity: sha512-iUcGA5a7p0mVb4Gm/sy+FSECNkPFT4y7wt6OM/CDpO/OnNCvSs3PoMG8ibrC9jRoGYU0gUK5pXVC4NPXq6lHRQ==}
-
-  axios@1.6.7:
-    resolution: {integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==}
 
   axios@1.7.7:
     resolution: {integrity: sha512-S4kL7XrjgBmvdGut0sN3yJxqYzrDOnivkBiN0OFs6hLiUam3UPvswUo0kqGyhqUZGEOytHyumEdXsAkgCOUf3Q==}
@@ -3977,6 +3974,7 @@ packages:
 
   ethereumjs-wallet@1.0.2:
     resolution: {integrity: sha512-CCWV4RESJgRdHIvFciVQFnCHfqyhXWchTPlkfp28Qc53ufs+doi5I/cV2+xeK9+qEo25XCWfP9MiL+WEPAZfdA==}
+    deprecated: 'New package name format for new versions: @ethereumjs/wallet. Please update.'
 
   ethers@5.7.2:
     resolution: {integrity: sha512-wswUsmWo1aOK8rR7DIKiWSw9DbLWe6x98Jrn8wcTflTVvaXhAMaB5zGAXy0GYQEQp9iO1iSHWVyARQm11zUtyg==}
@@ -5478,9 +5476,6 @@ packages:
   mustache@4.2.0:
     resolution: {integrity: sha512-71ippSywq5Yb7/tVYyGbkBggbU8H3u5Rz56fH60jGFgr8uHwxs+aSKeqmluIVzM0m0kB7xQjKS6qPfd0b2ZoqQ==}
     hasBin: true
-
-  nan@2.18.0:
-    resolution: {integrity: sha512-W7tfG7vMOGtD30sHoZSSc/JVYiyDPEyQVso/Zz+/uQd0B0L46gtC+pHha5FFMRpil6fm/AoEcRWyOVi4+E/f8w==}
 
   nan@2.20.0:
     resolution: {integrity: sha512-bk3gXBZDGILuuo/6sKtr0DQmSThYHLtNCdSdXk9YkxD/jK6X2vmCyyXBBxyqZ4XcnzTyYEAThfX3DCEnLf6igw==}
@@ -7361,18 +7356,6 @@ packages:
       utf-8-validate:
         optional: true
 
-  ws@7.5.9:
-    resolution: {integrity: sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==}
-    engines: {node: '>=8.3.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: ^5.0.2
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
-
   ws@8.16.0:
     resolution: {integrity: sha512-HS0c//TP7Ina87TfiPUz1rQzMhHrl/SG2guqRcTOIUYD2q8uhUdNHZYJUaQ8aTGPzCh+c6oawMKW35nFl1dxyQ==}
     engines: {node: '>=10.0.0'}
@@ -8774,7 +8757,7 @@ snapshots:
       '@types/node': 20.5.1
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@4.9.5)
-      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@4.9.5))(ts-node@10.9.2(@types/node@20.11.21)(typescript@4.9.5))(typescript@4.9.5)
+      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@4.9.5))(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))(typescript@4.9.5)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -8894,8 +8877,8 @@ snapshots:
   '@cosmjs/socket@0.32.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
     dependencies:
       '@cosmjs/stream': 0.32.2
-      isomorphic-ws: 4.0.1(ws@7.5.9(bufferutil@4.0.8)(utf-8-validate@5.0.10))
-      ws: 7.5.9(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      isomorphic-ws: 4.0.1(ws@7.5.10(bufferutil@4.0.8)(utf-8-validate@5.0.10))
+      ws: 7.5.10(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       xstream: 11.14.0
     transitivePeerDependencies:
       - bufferutil
@@ -9678,7 +9661,7 @@ snapshots:
       '@ledgerhq/hw-transport-mocker': 6.28.4
       '@ledgerhq/logs': 6.12.0
       '@ledgerhq/types-live': 6.45.0
-      axios: 1.6.7
+      axios: 1.7.7
       bignumber.js: 9.1.2
     transitivePeerDependencies:
       - bufferutil
@@ -10942,7 +10925,7 @@ snapshots:
       '@stablelib/salsa20': 1.0.2
       '@stablelib/wipe': 1.0.1
 
-  '@stakekit/common@0.0.39': {}
+  '@stakekit/common@0.0.44': {}
 
   '@stricahq/bip32ed25519@1.1.0':
     dependencies:
@@ -11167,11 +11150,11 @@ snapshots:
       jssha: 3.2.0
       tweetnacl: 1.0.3
 
-  '@ton/ton@15.0.0(@ton/core@0.57.0(@ton/crypto@3.3.0))(@ton/crypto@3.3.0)':
+  '@ton/ton@15.1.0(@ton/core@0.57.0(@ton/crypto@3.3.0))(@ton/crypto@3.3.0)':
     dependencies:
       '@ton/core': 0.57.0(@ton/crypto@3.3.0)
       '@ton/crypto': 3.3.0
-      axios: 1.6.7
+      axios: 1.7.7
       dataloader: 2.2.2
       symbol.inspect: 1.0.1
       teslabot: 1.5.0
@@ -11272,7 +11255,7 @@ snapshots:
 
   '@types/elliptic@6.4.18':
     dependencies:
-      '@types/bn.js': 4.11.6
+      '@types/bn.js': 5.1.5
 
   '@types/eslint@8.56.4':
     dependencies:
@@ -11745,7 +11728,7 @@ snapshots:
 
   axios@0.24.0:
     dependencies:
-      follow-redirects: 1.15.5
+      follow-redirects: 1.15.9
     transitivePeerDependencies:
       - debug
 
@@ -11759,14 +11742,6 @@ snapshots:
   axios@0.28.1:
     dependencies:
       follow-redirects: 1.15.9
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-
-  axios@1.6.7:
-    dependencies:
-      follow-redirects: 1.15.5
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -12428,7 +12403,7 @@ snapshots:
       object-assign: 4.1.1
       vary: 1.1.2
 
-  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@4.9.5))(ts-node@10.9.2(@types/node@20.11.21)(typescript@4.9.5))(typescript@4.9.5):
+  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@4.9.5))(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))(typescript@4.9.5):
     dependencies:
       '@types/node': 20.5.1
       cosmiconfig: 8.3.6(typescript@4.9.5)
@@ -14099,10 +14074,6 @@ snapshots:
     dependencies:
       ws: 7.5.10(bufferutil@4.0.8)(utf-8-validate@5.0.10)
 
-  isomorphic-ws@4.0.1(ws@7.5.9(bufferutil@4.0.8)(utf-8-validate@5.0.10)):
-    dependencies:
-      ws: 7.5.9(bufferutil@4.0.8)(utf-8-validate@5.0.10)
-
   isstream@0.1.2: {}
 
   istanbul-lib-coverage@3.2.2: {}
@@ -14156,11 +14127,11 @@ snapshots:
       delay: 5.0.0
       es6-promisify: 5.0.0
       eyes: 0.1.8
-      isomorphic-ws: 4.0.1(ws@7.5.9(bufferutil@4.0.8)(utf-8-validate@5.0.10))
+      isomorphic-ws: 4.0.1(ws@7.5.10(bufferutil@4.0.8)(utf-8-validate@5.0.10))
       json-stringify-safe: 5.0.1
       lodash: 4.17.21
       uuid: 8.3.2
-      ws: 7.5.9(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 7.5.10(bufferutil@4.0.8)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -14574,7 +14545,7 @@ snapshots:
       whatwg-encoding: 1.0.5
       whatwg-mimetype: 2.3.0
       whatwg-url: 8.7.0
-      ws: 7.5.9(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 7.5.10(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       xml-name-validator: 3.0.0
     transitivePeerDependencies:
       - bufferutil
@@ -15139,8 +15110,6 @@ snapshots:
   mustache@4.0.0: {}
 
   mustache@4.2.0: {}
-
-  nan@2.18.0: {}
 
   nan@2.20.0: {}
 
@@ -16235,7 +16204,7 @@ snapshots:
 
   signed-varint@2.0.1:
     dependencies:
-      varint: 5.0.0
+      varint: 5.0.2
 
   simple-concat@1.0.1: {}
 
@@ -16576,7 +16545,7 @@ snapshots:
       bn.js: 4.12.0
       create-hmac: 1.1.7
       elliptic: 6.5.4
-      nan: 2.18.0
+      nan: 2.20.0
 
   tmp@0.0.33:
     dependencies:
@@ -17316,11 +17285,6 @@ snapshots:
       utf-8-validate: 5.0.10
 
   ws@7.5.10(bufferutil@4.0.8)(utf-8-validate@5.0.10):
-    optionalDependencies:
-      bufferutil: 4.0.8
-      utf-8-validate: 5.0.10
-
-  ws@7.5.9(bufferutil@4.0.8)(utf-8-validate@5.0.10):
     optionalDependencies:
       bufferutil: 4.0.8
       utf-8-validate: 5.0.10
