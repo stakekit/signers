@@ -25,7 +25,7 @@ import { SignDoc, TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { Transaction, signTransaction } from 'near-api-js/lib/transaction';
 import { getAvalancheWallet } from './avalanche';
 import { getBinanceChainWallet } from './binance';
-import { getCardanoWallet } from './cardano';
+import { getCardanoWallet, signCardanoTx } from './cardano';
 import { getCeloWallet } from './celo';
 import {
   LedgerApps,
@@ -438,8 +438,8 @@ const cardanoSigningWallet = async (
   const wallet = await getCardanoWallet(options);
 
   return {
-    signTransaction: async (raw) => wallet.signTx(raw),
-    getAddress: async () => wallet.addresses.baseAddressBech32 ?? '',
+    signTransaction: async (raw) => signCardanoTx(wallet, raw),
+    getAddress: async () => wallet.getAccount().baseAddressBech32,
     getAdditionalAddresses: async () => ({}),
   };
 };

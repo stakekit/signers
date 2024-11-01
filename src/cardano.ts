@@ -1,7 +1,12 @@
-import { BlockfrostProvider, MeshWallet } from '@meshsdk/core';
+import { EmbeddedWallet } from '@meshsdk/core';
+import {
+  deserializeTxHash,
+  Ed25519PublicKeyHex,
+  Ed25519SignatureHex,
+  resolveTxHash,
+  VkeyWitness,
+} from '@meshsdk/core-cst';
 import { isLedgerOptions, WalletOptions } from './constants';
-
-const freeBlockfrostKey = 'mainnetGlmedbsdxOKvmiUPnXuf5slw8Wk8VQC5';
 
 export const getCardanoWallet = async (options: WalletOptions) => {
   if (isLedgerOptions(options)) {
@@ -9,16 +14,10 @@ export const getCardanoWallet = async (options: WalletOptions) => {
     throw new Error('Ledger mode is not supported.');
   }
 
-  const { mnemonic, apiKey } = options;
+  const { mnemonic } = options;
 
-  const blockchainProvider = new BlockfrostProvider(
-    apiKey ?? freeBlockfrostKey,
-  );
-
-  const wallet = new MeshWallet({
+  const wallet = new EmbeddedWallet({
     networkId: 1,
-    fetcher: blockchainProvider,
-    submitter: blockchainProvider,
     key: {
       type: 'mnemonic',
       words: mnemonic.split(' '),
@@ -26,4 +25,34 @@ export const getCardanoWallet = async (options: WalletOptions) => {
   });
 
   return wallet;
+};
+
+export const signCardanoTx = (
+  wallet: EmbeddedWallet,
+  unsignedTx: string,
+): string => {
+  const { paymentKey, stakeKey } = wallet.getAccount();
+
+  const hash = deserializeTxHash(resolveTxHash(unsignedTx));
+
+  const paymentKeyWitness = new VkeyWitness(
+    Ed25519PublicKeyHex(paymentKey.toPublicKey().toBytes().toString('hex')),
+    Ed25519SignatureHex(
+      paymentKey.sign(Buffer.from(hash, 'hex')).toString('hex'),
+    ),
+  );
+
+  const stakeKeyWitness = new VkeyWitness(
+    Ed25519PublicKeyHex(stakeKey.toPublicKey().toBytes().toString('hex')),
+    Ed25519SignatureHex(
+      stakeKey.sign(Buffer.from(hash, 'hex')).toString('hex'),
+    ),
+  );
+
+  const signedTx = EmbeddedWallet.addWitnessSets(unsignedTx, [
+    paymentKeyWitness,
+    stakeKeyWitness,
+  ]);
+
+  return signedTx;
 };

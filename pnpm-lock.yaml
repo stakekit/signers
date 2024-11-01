@@ -82,6 +82,9 @@ importers:
       '@meshsdk/core':
         specifier: ^1.7.8
         version: 1.7.8(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/crypto@0.2.4)(@harmoniclabs/pair@1.0.0)(bufferutil@4.0.8)(rxjs@7.8.1)(utf-8-validate@5.0.10)
+      '@meshsdk/core-cst':
+        specifier: ^1.7.11
+        version: 1.7.11(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/crypto@0.2.4)(@harmoniclabs/pair@1.0.0)(bufferutil@4.0.8)(rxjs@7.8.1)(utf-8-validate@5.0.10)
       '@metamask/eth-sig-util':
         specifier: ^4.0.1
         version: 4.0.1
@@ -1097,6 +1100,21 @@ packages:
       rxjs:
         optional: true
 
+  '@cardano-sdk/crypto@0.1.28':
+    resolution: {integrity: sha512-Uw7+DFAE/nNBfxLU1dZB/p2zatsM2RQZ2q3t/MfQ6mAHQhd1aRy+MKkdWJGsHMu7VNzi4NMGIMq3LJowFXbGdg==}
+    engines: {node: '>=16.20.2'}
+    peerDependencies:
+      '@dcspark/cardano-multiplatform-lib-asmjs': ^3.1.1
+      '@dcspark/cardano-multiplatform-lib-browser': ^3.1.1
+      '@dcspark/cardano-multiplatform-lib-nodejs': ^3.1.1
+    peerDependenciesMeta:
+      '@dcspark/cardano-multiplatform-lib-asmjs':
+        optional: true
+      '@dcspark/cardano-multiplatform-lib-browser':
+        optional: true
+      '@dcspark/cardano-multiplatform-lib-nodejs':
+        optional: true
+
   '@cardano-sdk/crypto@0.1.30':
     resolution: {integrity: sha512-xUJSF+OWL8z1t/cnjRlYVMIC2zlk3cYazn6/+bEyvXHv9+XyPbgZK44iOiJryJcgsaG7ibzJXaOw/DWeS1dwSg==}
     engines: {node: '>=16.20.2'}
@@ -1130,6 +1148,10 @@ packages:
 
   '@cardano-sdk/util-dev@0.22.10':
     resolution: {integrity: sha512-QcBucBazTpdQz+YZC9nz8lXSMcncBN8irNxKc+iVPZqWFyVmlYBQuLWtdL2p4BffbimrEpA5n75LOSrbcQLTGg==}
+    engines: {node: '>=16.20.2'}
+
+  '@cardano-sdk/util@0.15.4':
+    resolution: {integrity: sha512-lUPCCPADaORY0O5fFKYzGSQiQtCK6pkF7XKxDIwpWts9MvW6RKm8QtUiY0J0FpzcbTTIvcMWOfzkOivtTm3LvA==}
     engines: {node: '>=16.20.2'}
 
   '@cardano-sdk/util@0.15.5':
@@ -1690,11 +1712,17 @@ packages:
     engines: {node: ^14.15.0 || >=16.0.0}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
+  '@meshsdk/common@1.7.11':
+    resolution: {integrity: sha512-C13WLvKaqti02wnh4Aw1mcYqV+kcG9aGx+xE0T7TiPMzNycVi3hVIcTaw4HhOSwK/UG60jQtk2BAMSwZaNKh3A==}
+
   '@meshsdk/common@1.7.8':
     resolution: {integrity: sha512-ocQuDzfiO8/OYlWlRkGX3G5H4c7m3begBWRz6QuJjxl+cb9KJCUUcVvnY46HtpN82niKkdYNXDh5oGkJkNB+MQ==}
 
   '@meshsdk/core-csl@1.7.8':
     resolution: {integrity: sha512-DRS5wcvoug/4//O1usyKN4T67paEy3ZSZe34bOreUd1P60vDo9tLdI/xWrEqXBnqN30baXNAQO/EGN2gmxWQFg==}
+
+  '@meshsdk/core-cst@1.7.11':
+    resolution: {integrity: sha512-mofFH2kvp6ITif7CmSu59MT33YecJ4PcQ3U/YHgNdxg7iHvJUGSRVUYtC3QKtc/JmdL9LUCmm7rgcisJ1V4QqA==}
 
   '@meshsdk/core-cst@1.7.8':
     resolution: {integrity: sha512-/dwgwhlCPC5PNKA4W2BTiodDregDLd40hOlqh6TrQFue5yt2bOvrthz8rGvgEHWJRryf/nzZ/mw2qHZ1yt+cVA==}
@@ -8537,6 +8565,18 @@ snapshots:
       - encoding
       - utf-8-validate
 
+  '@cardano-sdk/crypto@0.1.28':
+    dependencies:
+      '@cardano-sdk/util': 0.15.5
+      blake2b: 2.1.4
+      i: 0.3.7
+      libsodium-wrappers-sumo: 0.7.13
+      lodash: 4.17.21
+      npm: 9.9.3
+      pbkdf2: 3.1.2
+      ts-custom-error: 3.3.1
+      ts-log: 2.2.7
+
   '@cardano-sdk/crypto@0.1.30':
     dependencies:
       '@cardano-sdk/util': 0.15.5
@@ -8669,6 +8709,15 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@cardano-sdk/util@0.15.4':
+    dependencies:
+      bech32: 2.0.0
+      lodash: 4.17.21
+      serialize-error: 8.1.0
+      ts-custom-error: 3.3.1
+      ts-log: 2.2.7
+      type-fest: 2.19.0
+
   '@cardano-sdk/util@0.15.5':
     dependencies:
       bech32: 2.0.0
@@ -8757,7 +8806,7 @@ snapshots:
       '@types/node': 20.5.1
       chalk: 4.1.2
       cosmiconfig: 8.3.6(typescript@4.9.5)
-      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@4.9.5))(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))(typescript@4.9.5)
+      cosmiconfig-typescript-loader: 4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@4.9.5))(ts-node@10.9.2(@types/node@20.11.21)(typescript@4.9.5))(typescript@4.9.5)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -9797,6 +9846,12 @@ snapshots:
     dependencies:
       npmlog: 6.0.2
 
+  '@meshsdk/common@1.7.11':
+    dependencies:
+      bech32: 2.0.0
+      bip39: 3.1.0
+      blake2b: 2.1.4
+
   '@meshsdk/common@1.7.8':
     dependencies:
       bech32: 2.0.0
@@ -9809,6 +9864,32 @@ snapshots:
       '@sidan-lab/sidan-csl-rs-browser': 0.8.7
       '@sidan-lab/sidan-csl-rs-nodejs': 0.8.7
       json-bigint: 1.0.0
+
+  '@meshsdk/core-cst@1.7.11(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/crypto@0.2.4)(@harmoniclabs/pair@1.0.0)(bufferutil@4.0.8)(rxjs@7.8.1)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@cardano-sdk/core': 0.35.4(bufferutil@4.0.8)(rxjs@7.8.1)(utf-8-validate@5.0.10)
+      '@cardano-sdk/crypto': 0.1.28
+      '@cardano-sdk/util': 0.15.4
+      '@harmoniclabs/cbor': 1.3.0
+      '@harmoniclabs/plutus-data': 1.2.4(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/cbor@1.3.0)
+      '@harmoniclabs/uplc': 1.2.4(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/cbor@1.3.0)(@harmoniclabs/crypto@0.2.4)(@harmoniclabs/pair@1.0.0)(@harmoniclabs/plutus-data@1.2.4(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/cbor@1.3.0))
+      '@meshsdk/common': 1.7.11
+      '@stricahq/bip32ed25519': 1.1.0
+      '@stricahq/cbors': 1.0.3
+      pbkdf2: 3.1.2
+    transitivePeerDependencies:
+      - '@dcspark/cardano-multiplatform-lib-asmjs'
+      - '@dcspark/cardano-multiplatform-lib-browser'
+      - '@dcspark/cardano-multiplatform-lib-nodejs'
+      - '@harmoniclabs/bytestring'
+      - '@harmoniclabs/crypto'
+      - '@harmoniclabs/pair'
+      - bufferutil
+      - debug
+      - encoding
+      - rxjs
+      - supports-color
+      - utf-8-validate
 
   '@meshsdk/core-cst@1.7.8(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/crypto@0.2.4)(@harmoniclabs/pair@1.0.0)(bufferutil@4.0.8)(rxjs@7.8.1)(utf-8-validate@5.0.10)':
     dependencies:
@@ -9830,10 +9911,8 @@ snapshots:
       - '@harmoniclabs/crypto'
       - '@harmoniclabs/pair'
       - bufferutil
-      - debug
       - encoding
       - rxjs
-      - supports-color
       - utf-8-validate
 
   '@meshsdk/core@1.7.8(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/crypto@0.2.4)(@harmoniclabs/pair@1.0.0)(bufferutil@4.0.8)(rxjs@7.8.1)(utf-8-validate@5.0.10)':
@@ -9856,7 +9935,6 @@ snapshots:
       - debug
       - encoding
       - rxjs
-      - supports-color
       - utf-8-validate
 
   '@meshsdk/provider@1.7.8(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/crypto@0.2.4)(@harmoniclabs/pair@1.0.0)(bufferutil@4.0.8)(rxjs@7.8.1)(utf-8-validate@5.0.10)':
@@ -9875,7 +9953,6 @@ snapshots:
       - debug
       - encoding
       - rxjs
-      - supports-color
       - utf-8-validate
 
   '@meshsdk/react@1.7.8(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/crypto@0.2.4)(@harmoniclabs/pair@1.0.0)(bufferutil@4.0.8)(rxjs@7.8.1)(utf-8-validate@5.0.10)':
@@ -9892,10 +9969,8 @@ snapshots:
       - '@harmoniclabs/crypto'
       - '@harmoniclabs/pair'
       - bufferutil
-      - debug
       - encoding
       - rxjs
-      - supports-color
       - utf-8-validate
 
   '@meshsdk/transaction@1.7.8(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/crypto@0.2.4)(@harmoniclabs/pair@1.0.0)(bufferutil@4.0.8)(rxjs@7.8.1)(utf-8-validate@5.0.10)':
@@ -9912,10 +9987,8 @@ snapshots:
       - '@harmoniclabs/crypto'
       - '@harmoniclabs/pair'
       - bufferutil
-      - debug
       - encoding
       - rxjs
-      - supports-color
       - utf-8-validate
 
   '@meshsdk/wallet@1.7.8(@harmoniclabs/bytestring@1.0.0)(@harmoniclabs/crypto@0.2.4)(@harmoniclabs/pair@1.0.0)(bufferutil@4.0.8)(rxjs@7.8.1)(utf-8-validate@5.0.10)':
@@ -9934,10 +10007,8 @@ snapshots:
       - '@harmoniclabs/crypto'
       - '@harmoniclabs/pair'
       - bufferutil
-      - debug
       - encoding
       - rxjs
-      - supports-color
       - utf-8-validate
 
   '@metamask/eth-sig-util@4.0.1':
@@ -12403,7 +12474,7 @@ snapshots:
       object-assign: 4.1.1
       vary: 1.1.2
 
-  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@4.9.5))(ts-node@10.9.2(@types/node@20.5.1)(typescript@4.9.5))(typescript@4.9.5):
+  cosmiconfig-typescript-loader@4.4.0(@types/node@20.5.1)(cosmiconfig@8.3.6(typescript@4.9.5))(ts-node@10.9.2(@types/node@20.11.21)(typescript@4.9.5))(typescript@4.9.5):
     dependencies:
       '@types/node': 20.5.1
       cosmiconfig: 8.3.6(typescript@4.9.5)
