@@ -41,7 +41,6 @@ export type MnemonicWalletOptions = {
   mnemonic: string;
   walletType: ImportableWallets;
   index: number;
-  apiKey?: string;
 };
 
 export type WalletOptions = MnemonicWalletOptions | LedgerOptions;
