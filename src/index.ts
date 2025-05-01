@@ -11,3 +11,4 @@ export * from './solana';
 export * from './substrate';
 export * from './tezos';
 export * from './utils';
+export * from './aptos';
