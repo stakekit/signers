@@ -14,6 +14,7 @@ export const tronPath = (index: number) => `m/44'/195'/0'/0/${index}`;
 export const polkadotPath = (index: number) =>
   index === 0 ? '' : `//${index - 1}`;
 export const tonKeeperPath = () => '4';
+export const aptosPath = (index: number) => `m/44'/637'/${index}'/0'/0'`;
 
 const nearPath = () => "m/44'/397'/0'";
 const binanceChainPath = () => "m/44'/714'/0'/0/0";
@@ -92,6 +93,7 @@ export enum WalletDomain {
   tron = 'tron',
   polkadot = 'polkadot',
   ton = 'ton',
+  aptos = 'aptos',
 }
 
 export type WalletDerivationPaths = {
@@ -109,6 +111,7 @@ const steakwalletDerivationPaths: WalletDerivationPaths = {
   tron: tronPath,
   polkadot: polkadotPath,
   ton: tonKeeperPath,
+  aptos: aptosPath,
 };
 
 const omniDerivationPaths: {

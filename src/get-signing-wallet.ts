@@ -23,6 +23,11 @@ import {
 } from '@substrate/txwrapper-polkadot';
 import { SignDoc, TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { Transaction, signTransaction } from 'near-api-js/lib/transaction';
+import {
+  AccountAuthenticatorEd25519,
+  Ed25519PublicKey,
+  Ed25519Signature,
+} from '@aptos-labs/ts-sdk';
 import { getAvalancheWallet } from './avalanche';
 import { getBinanceChainWallet } from './binance';
 import { getCardanoWallet, signCardanoTx } from './cardano';
@@ -46,6 +51,7 @@ import { getTezosWallet } from './tezos';
 import { buildSignedMessageFromRaw, getTonWallet } from './ton';
 import { getTronWallet } from './tron';
 import { incrementDerivationPath } from './utils';
+import { getAptosWallet } from './aptos';
 
 const avalancheCSigningWallet = async (
   options: WalletOptions,
@@ -444,6 +450,49 @@ const cardanoSigningWallet = async (
   };
 };
 
+const aptosSigningWallet = async (
+  options: WalletOptions,
+): Promise<SigningWallet> => {
+  const wallet = await getAptosWallet(options);
+
+  return {
+    signTransaction: async (tx) => {
+      // Parse the transaction data sent from the client
+      const txPayload = JSON.parse(tx);
+
+      // Get the raw transaction bytes for signing
+      const rawTxBytes = new Uint8Array(
+        Buffer.from(txPayload.rawTxBytes, 'hex'),
+      );
+
+      // Sign the transaction bytes
+      const signature = wallet.sign(rawTxBytes);
+
+      // Create the proper Ed25519Signature object from the signature bytes
+      const ed25519Signature = new Ed25519Signature(signature.toUint8Array());
+
+      // Create the Ed25519PublicKey from the wallet's public key
+      const publicKey = new Ed25519PublicKey(wallet.publicKey.toUint8Array());
+
+      // Create the authenticator
+      const authenticator = new AccountAuthenticatorEd25519(
+        publicKey,
+        ed25519Signature,
+      );
+
+      // Return both the serialized transaction and serialized authenticator
+      return JSON.stringify({
+        transactionBytes: txPayload.rawTxBytes, // Already a hex string
+        authenticatorBytes: Buffer.from(authenticator.bcsToBytes()).toString(
+          'hex',
+        ),
+      });
+    },
+    getAddress: async () => wallet.accountAddress.toString(),
+    getAdditionalAddresses: async () => ({}),
+  };
+};
+
 const getters: {
   [n in Networks]?: (o: WalletOptions) => Promise<SigningWallet>;
 } = {
@@ -483,6 +532,7 @@ const getters: {
   [Networks.Ton]: tonSigningWallet,
   [Networks.TonTestnet]: (o: WalletOptions) => tonSigningWallet(o, true),
   [Networks.Cardano]: cardanoSigningWallet,
+  [Networks.Aptos]: aptosSigningWallet,
 };
 
 export const getSigningWallet = async (
@@ -494,5 +544,5 @@ export const getSigningWallet = async (
     throw new Error('Missing wallet implementation for network');
   }
 
-  return await getSigningWalletImpl(options);
+  return getSigningWalletImpl(options);
 };
