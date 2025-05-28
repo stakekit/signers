@@ -11,6 +11,9 @@ export const getKeyringOptionsFromNetwork = (
     case SubstrateNetworks.Kusama:
       return { type: 'sr25519', ss58Format: 2 };
     case SubstrateNetworks.Westend:
+    case SubstrateNetworks.Bittensor:
       return { type: 'sr25519', ss58Format: 42 };
+    default:
+      throw new Error(`Unsupported network: ${network}`);
   }
 };
