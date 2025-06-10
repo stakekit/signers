@@ -65,7 +65,7 @@ async function deriveEd25519PrivateKey(
   mnemonic: string,
   derivationPath: string,
 ): Promise<Uint8Array> {
-  const seed = Buffer.from(await getSeed(mnemonic)).toString('hex');
+  const seed = (await getSeed(mnemonic)).toString('hex');
   const key = derivePath(derivationPath, seed).key;
   return key;
 }
