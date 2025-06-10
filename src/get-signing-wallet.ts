@@ -42,6 +42,7 @@ import {
   getSolanaWallet,
 } from './solana';
 import { getSubstrateWallet } from './substrate';
+import { getStellarWallet } from './stellar';
 import { getTezosWallet } from './tezos';
 import { buildSignedMessageFromRaw, getTonWallet } from './ton';
 import { getTronWallet } from './tron';
@@ -444,6 +445,20 @@ const cardanoSigningWallet = async (
   };
 };
 
+const stellarSigningWallet = async (
+  network: Networks,
+  options: WalletOptions,
+): Promise<SigningWallet> => {
+  const wallet = await getStellarWallet(network, options);
+
+  return {
+    signTransaction: async (unsignedTransactionXdr: string) =>
+      wallet.signTransaction(unsignedTransactionXdr),
+    getAddress: () => wallet.getAddress(),
+    getAdditionalAddresses: () => wallet.getAdditionalAddresses(),
+  };
+};
+
 const getters: {
   [n in Networks]?: (o: WalletOptions) => Promise<SigningWallet>;
 } = {
@@ -483,6 +498,10 @@ const getters: {
   [Networks.Ton]: tonSigningWallet,
   [Networks.TonTestnet]: (o: WalletOptions) => tonSigningWallet(o, true),
   [Networks.Cardano]: cardanoSigningWallet,
+  [Networks.Stellar]: (o: WalletOptions) =>
+    stellarSigningWallet(Networks.Stellar, o),
+  [Networks.StellarTestnet]: (o: WalletOptions) =>
+    stellarSigningWallet(Networks.StellarTestnet, o),
 };
 
 export const getSigningWallet = async (

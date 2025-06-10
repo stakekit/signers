@@ -38,7 +38,7 @@ async function fromMnemonic(mnemonic: string, derivationPath: string) {
   }
 
   // Phantom wallet or a Phantom stake account
-  const seed = Buffer.from(await getSeed(mnemonic)).toString('hex');
+  const seed = (await getSeed(mnemonic)).toString('hex');
   const key = derivePath(derivationPath, seed).key;
   return new SolanaKeyPairSigner(
     Keypair.fromSecretKey(nacl.sign.keyPair.fromSeed(key).secretKey),
