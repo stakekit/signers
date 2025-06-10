@@ -41,6 +41,9 @@ const resolver: {
     const config = await app.getAppConfiguration();
     return config.device_locked === false;
   },
+  [LedgerApps.Stellar]: async () => {
+    throw new Error('Stellar Ledger support not implemented');
+  },
 };
 
 export function isTransportConnected(transport: Transport, app: LedgerApps) {

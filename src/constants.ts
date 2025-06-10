@@ -14,6 +14,7 @@ export const tronPath = (index: number) => `m/44'/195'/0'/0/${index}`;
 export const polkadotPath = (index: number) =>
   index === 0 ? '' : `//${index - 1}`;
 export const tonKeeperPath = () => '4';
+export const stellarPath = (index: number) => `m/44'/148'/${index}'`;
 
 const nearPath = () => "m/44'/397'/0'";
 const binanceChainPath = () => "m/44'/714'/0'/0/0";
@@ -92,6 +93,7 @@ export enum WalletDomain {
   tron = 'tron',
   polkadot = 'polkadot',
   ton = 'ton',
+  stellar = 'stellar',
 }
 
 export type WalletDerivationPaths = {
@@ -109,6 +111,7 @@ const steakwalletDerivationPaths: WalletDerivationPaths = {
   tron: tronPath,
   polkadot: polkadotPath,
   ton: tonKeeperPath,
+  stellar: stellarPath,
 };
 
 const omniDerivationPaths: {
@@ -146,6 +149,7 @@ export enum LedgerApps {
   Tezos = 'Tezos',
   Solana = 'Solana',
   Binance = 'Binance',
+  Stellar = 'Stellar',
 }
 
 export const defaultLedgerDerivationPaths: { [x in LedgerApps]: string } = {
@@ -155,4 +159,5 @@ export const defaultLedgerDerivationPaths: { [x in LedgerApps]: string } = {
   [LedgerApps.Tezos]: "44'/1729'/0'/0'",
   [LedgerApps.Binance]: "44/714/0/0/0'",
   [LedgerApps.Solana]: phantomPath(0),
+  [LedgerApps.Stellar]: stellarPath(0),
 };

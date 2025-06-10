@@ -8,6 +8,7 @@ export * from './get-signing-wallet';
 export * from './ledger';
 export * from './near';
 export * from './solana';
+export * from './stellar';
 export * from './substrate';
 export * from './tezos';
 export * from './utils';
