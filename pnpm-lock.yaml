@@ -110,8 +110,8 @@ importers:
         specifier: 1.52.0
         version: 1.52.0(bufferutil@4.0.9)(react-native@0.79.3(@babel/core@7.27.4)(bufferutil@4.0.9)(react@18.3.1)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
       '@stakekit/common':
-        specifier: ^0.0.54
-        version: 0.0.54
+        specifier: ^0.0.55
+        version: 0.0.55
       '@stellar/stellar-sdk':
         specifier: ^13.3.0
         version: 13.3.0
@@ -2115,8 +2115,8 @@ packages:
   '@stablelib/xsalsa20@1.0.2':
     resolution: {integrity: sha512-7XdBGbcNgBShmuhDXv1G1WPVCkjZdkb1oPMzSidO7Fve0MHntH6TjFkj5bfLI+aRE+61weO076vYpP/jmaAYog==}
 
-  '@stakekit/common@0.0.54':
-    resolution: {integrity: sha512-0geDMuHBUUbRX+TnxdzuzP3pRsoMkprSWxFDc3gh8c5cLVb/1bh97irQkO3w54jmUCZE0v2d5wTrgaMwD185/w==}
+  '@stakekit/common@0.0.55':
+    resolution: {integrity: sha512-QcgVGWzMUzFO/dU/Akg7cgYUEPWM38E2hYWwzDWX2hoiDgICYWa29Uu8h74X02+LCpZvqnOziZ83P0GQ+st8FQ==}
 
   '@stellar/js-xdr@3.1.2':
     resolution: {integrity: sha512-VVolPL5goVEIsvuGqDc5uiKxV03lzfWdvYg1KikvwheDmTBO68CKDji3bAZ/kppZrx5iTA8z3Ld5yuytcvhvOQ==}
@@ -2541,8 +2541,8 @@ packages:
     resolution: {integrity: sha512-0INat5xSjkTeqKr+JO3SMQQ2PxcfZNUi5wJja/Fpnp68f52eTJf4X4QGy7tzqYzMsK/ZYhRr95J+WUeM6Vbmwg==}
     engines: {node: '>=20.0.0'}
 
-  '@web3-js/scrypt-shim@git+https://git@github.com:web3-js/scrypt-shim.git#aafdadda13e660e25e1c525d1f5b2443f5eb1ebb':
-    resolution: {commit: aafdadda13e660e25e1c525d1f5b2443f5eb1ebb, repo: git@github.com:web3-js/scrypt-shim.git, type: git}
+  '@web3-js/scrypt-shim@https://codeload.github.com/web3-js/scrypt-shim/tar.gz/aafdadda13e660e25e1c525d1f5b2443f5eb1ebb':
+    resolution: {tarball: https://codeload.github.com/web3-js/scrypt-shim/tar.gz/aafdadda13e660e25e1c525d1f5b2443f5eb1ebb}
     version: 0.1.0
 
   '@webtorrent/http-node@1.3.0':
@@ -9036,7 +9036,7 @@ snapshots:
       hmac-drbg: 1.0.1
       js-sha3: 0.8.0
       pbkdf2: 3.1.2
-      scrypt-shim: '@web3-js/scrypt-shim@git+https://git@github.com:web3-js/scrypt-shim.git#aafdadda13e660e25e1c525d1f5b2443f5eb1ebb'
+      scrypt-shim: '@web3-js/scrypt-shim@https://codeload.github.com/web3-js/scrypt-shim/tar.gz/aafdadda13e660e25e1c525d1f5b2443f5eb1ebb'
       uuid: 3.4.0
 
   '@harmony-js/network@0.1.56':
@@ -10863,7 +10863,7 @@ snapshots:
       '@stablelib/salsa20': 1.0.2
       '@stablelib/wipe': 1.0.1
 
-  '@stakekit/common@0.0.54': {}
+  '@stakekit/common@0.0.55': {}
 
   '@stellar/js-xdr@3.1.2': {}
 
@@ -11499,7 +11499,7 @@ snapshots:
     dependencies:
       '@bufbuild/protobuf': 1.10.1
 
-  '@web3-js/scrypt-shim@git+https://git@github.com:web3-js/scrypt-shim.git#aafdadda13e660e25e1c525d1f5b2443f5eb1ebb':
+  '@web3-js/scrypt-shim@https://codeload.github.com/web3-js/scrypt-shim/tar.gz/aafdadda13e660e25e1c525d1f5b2443f5eb1ebb':
     dependencies:
       scryptsy: 2.1.0
       semver: 6.3.1
