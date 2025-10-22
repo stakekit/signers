@@ -31,7 +31,9 @@ export class SuiKeypairSigner implements SuiSigner {
 
   async signTransaction(unsignedTransaction: string): Promise<string> {
     const client = new SuiClient({ url: getFullnodeUrl('mainnet') });
-    const tx = Transaction.from(Buffer.from(unsignedTransaction, 'hex'));
+    const tx = Transaction.from(
+      Buffer.from(unsignedTransaction, 'base64').toString(),
+    );
     const { signature } = await tx.sign({
       client,
       signer: this.keypair,

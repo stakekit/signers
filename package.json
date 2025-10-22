@@ -1,7 +1,7 @@
 {
   "name": "@stakekit/signers",
   "version": "0.1.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "clean": "rm -rf lib",
     "lint": "eslint \"src/**/*.ts\"",
@@ -52,7 +52,7 @@
     "@solana/buffer-layout": "^4.0.0",
     "@solana/spl-token": "^0.3.4",
     "@solana/web3.js": "1.52.0",
-    "@stakekit/common": "^0.0.56",
+    "@stakekit/common": "^0.0.58",
     "@stakekit/signers": "link:",
     "@stellar/stellar-sdk": "^13.3.0",
     "@substrate/txwrapper-polkadot": "^7.5.2",

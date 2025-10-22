@@ -113,8 +113,8 @@ importers:
         specifier: 1.52.0
         version: 1.52.0(bufferutil@4.0.9)(react-native@0.79.3(@babel/core@7.27.4)(bufferutil@4.0.9)(react@18.3.1)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
       '@stakekit/common':
-        specifier: ^0.0.56
-        version: 0.0.56
+        specifier: ^0.0.58
+        version: 0.0.58
       '@stakekit/signers':
         specifier: 'link:'
         version: 'link:'
@@ -2249,8 +2249,8 @@ packages:
   '@stablelib/xsalsa20@1.0.2':
     resolution: {integrity: sha512-7XdBGbcNgBShmuhDXv1G1WPVCkjZdkb1oPMzSidO7Fve0MHntH6TjFkj5bfLI+aRE+61weO076vYpP/jmaAYog==}
 
-  '@stakekit/common@0.0.56':
-    resolution: {integrity: sha512-j4iA1loOCwqBzV8/jpxmhdB18W7NDrv9lpLRElBoiSF2plD3CCRgO78rGhO7sAMUoEqgKELisxApgS4iD5SNHw==}
+  '@stakekit/common@0.0.58':
+    resolution: {integrity: sha512-Dl5pPT4OVpfCsGr+tMsNG15/6vrkt3VUha5/bZYzUsZPsrJUQX4Fb3iMgJPPXkQsWK8ipntAafuCPKWAp6A1Sg==}
 
   '@stellar/js-xdr@3.1.2':
     resolution: {integrity: sha512-VVolPL5goVEIsvuGqDc5uiKxV03lzfWdvYg1KikvwheDmTBO68CKDji3bAZ/kppZrx5iTA8z3Ld5yuytcvhvOQ==}
@@ -11256,7 +11256,7 @@ snapshots:
       '@stablelib/salsa20': 1.0.2
       '@stablelib/wipe': 1.0.1
 
-  '@stakekit/common@0.0.56': {}
+  '@stakekit/common@0.0.58': {}
 
   '@stellar/js-xdr@3.1.2': {}
 
