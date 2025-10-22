@@ -53,7 +53,6 @@
     "@solana/spl-token": "^0.3.4",
     "@solana/web3.js": "1.52.0",
     "@stakekit/common": "^0.0.58",
-    "@stakekit/signers": "link:",
     "@stellar/stellar-sdk": "^13.3.0",
     "@substrate/txwrapper-polkadot": "^7.5.2",
     "@sushiswap/default-token-list": "^41.4.0",
