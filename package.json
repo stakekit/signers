@@ -1,6 +1,7 @@
 {
   "name": "@stakekit/signers",
   "version": "0.0.99",
+  "type": "module",
   "scripts": {
     "clean": "rm -rf lib",
     "lint": "eslint \"src/**/*.ts\"",
@@ -43,6 +44,7 @@
     "@meshsdk/core": "^1.7.8",
     "@meshsdk/core-cst": "^1.7.11",
     "@metamask/eth-sig-util": "^4.0.1",
+    "@mysten/sui": "^1.43.1",
     "@polkadot/api": "^15.6.1",
     "@polkadot/keyring": "^13.5.4",
     "@polkadot/types": "^15.6.1",
@@ -95,12 +97,13 @@
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
     "@commitlint/config-lerna-scopes": "^17.4.2",
+    "@types/bech32": "^1.1.8",
     "@types/create-hash": "^1.2.2",
     "@types/eslint": "^8",
     "@types/hdkey": "^2.0.1",
     "@types/jest": "^29.5.2",
     "@types/memoizee": "^0.4.8",
-    "@types/node": "^20.5.9",
+    "@types/node": "^20.19.23",
     "@types/prettier": "^2",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
@@ -115,7 +118,7 @@
     "jest-runner": "^29.5.0",
     "prettier": "^2.8.7",
     "ts-jest": "^29.1.0",
-    "typescript": "^4.6.2"
+    "typescript": "^5.8.3"
   },
   "bundledDependencies": [
     "ed25519-hd-key"

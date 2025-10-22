@@ -10,7 +10,11 @@ export class NonceManager extends ethers.Signer {
     super();
     this._deltaCount = 0;
     ethers.utils.defineReadOnly(this, 'signer', signer);
-    ethers.utils.defineReadOnly(this, 'provider', signer.provider);
+    ethers.utils.defineReadOnly(
+      this,
+      'provider',
+      signer.provider as ethers.providers.Provider,
+    );
   }
 
   connect(provider: ethers.providers.Provider): NonceManager {

@@ -15,6 +15,7 @@ export const polkadotPath = (index: number) =>
   index === 0 ? '' : `//${index - 1}`;
 export const tonKeeperPath = () => '4';
 export const stellarPath = (index: number) => `m/44'/148'/${index}'`;
+export const suiPath = (index: number) => `m/44'/784'/${index}'/0'/0'`;
 
 const nearPath = () => "m/44'/397'/0'";
 const binanceChainPath = () => "m/44'/714'/0'/0/0";
@@ -94,6 +95,7 @@ export enum WalletDomain {
   polkadot = 'polkadot',
   ton = 'ton',
   stellar = 'stellar',
+  sui = 'sui',
 }
 
 export type WalletDerivationPaths = {
@@ -112,13 +114,19 @@ const steakwalletDerivationPaths: WalletDerivationPaths = {
   polkadot: polkadotPath,
   ton: tonKeeperPath,
   stellar: stellarPath,
+  sui: suiPath,
 };
 
-const omniDerivationPaths: {
-  [x in WalletDomain]: (index: number) => string | undefined;
-} = {
+const omniDerivationPaths: WalletDerivationPaths = {
   ...steakwalletDerivationPaths,
   evm: metamaskPath,
+};
+
+const phantomDerivationPaths: WalletDerivationPaths = {
+  ...steakwalletDerivationPaths,
+  evm: metamaskPath,
+  sui: suiPath,
+  solana: phantomPath,
 };
 
 const createDerivationPaths = (
@@ -134,7 +142,7 @@ export const walletDerivationPaths: {
 } = {
   [ImportableWallets.MetaMask]: createDerivationPaths(metamaskPath),
   [ImportableWallets.Keplr]: createDerivationPaths(keplrPath),
-  [ImportableWallets.Phantom]: createDerivationPaths(phantomPath),
+  [ImportableWallets.Phantom]: phantomDerivationPaths,
   [ImportableWallets.Steakwallet]: steakwalletDerivationPaths,
   [ImportableWallets.Omni]: omniDerivationPaths,
   [ImportableWallets.Temple]: createDerivationPaths(templePath),
