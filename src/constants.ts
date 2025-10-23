@@ -123,10 +123,18 @@ const omniDerivationPaths: WalletDerivationPaths = {
 };
 
 const phantomDerivationPaths: WalletDerivationPaths = {
-  ...steakwalletDerivationPaths,
-  evm: metamaskPath,
-  sui: suiPath,
+  cosmos: phantomPath,
+  evm: phantomPath,
+  near: phantomPath,
+  tezos: phantomPath,
+  binanceChain: phantomPath,
+  celo: phantomPath,
+  tron: phantomPath,
+  polkadot: phantomPath,
+  ton: phantomPath,
+  stellar: phantomPath,
   solana: phantomPath,
+  sui: suiPath,
 };
 
 const createDerivationPaths = (

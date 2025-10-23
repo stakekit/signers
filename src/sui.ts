@@ -6,7 +6,7 @@ import {
   isLedgerOptions,
   walletDerivationPaths,
   WalletOptions,
-} from './constants.js';
+} from './constants';
 
 export interface SuiSigner {
   getAddress: () => Promise<string>;
