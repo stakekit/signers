@@ -115,9 +115,6 @@ importers:
       '@stakekit/common':
         specifier: ^0.0.58
         version: 0.0.58
-      '@stakekit/signers':
-        specifier: 'link:'
-        version: 'link:'
       '@stellar/stellar-sdk':
         specifier: ^13.3.0
         version: 13.3.0
